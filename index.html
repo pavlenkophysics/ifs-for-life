@@ -404,17 +404,24 @@
     .hello-inner {
       display: grid;
       gap: 1.75rem;
-      align-items: center;
+      align-items: start;
+      grid-template-columns: auto 1fr;
+      grid-template-areas: "hello-photo hello-text";
     }
-    @media (min-width: 720px) {
+    @media (max-width: 560px) {
       .hello-inner {
-        grid-template-columns: minmax(0, 1.6fr) auto;
+        grid-template-columns: 1fr;
+        grid-template-areas: "hello-photo" "hello-text";
+        justify-items: center;
       }
+      .hello-text h2 { padding-left: 0; border-left: none; }
     }
 
     .hello-photo {
+      grid-area: hello-photo;
       width: 180px;
       height: 180px;
+      min-width: 180px;
       border-radius: 50%;
       overflow: hidden;
       border: 4px solid var(--accent);
@@ -425,6 +432,10 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+    .hello-text {
+      grid-area: hello-text;
+      min-width: 0;
     }
 
     .teacher-meta {
@@ -631,7 +642,7 @@
       <div class="container">
         <div>
           <p class="section-heading-note">Следующий шаг</p>
-          <h2>Запишитесь в вейтлист</h2>
+          <h2>Запись в вейтлист</h2>
           <p>Старт курса — 5 апреля. Старт продаж — 21 марта. Чат откроется за неделю до старта курса. Чтобы попасть в вейтлист, заполните форму по ссылке ниже.</p>
           <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
           <p style="margin-top: 1.25rem;">Если у вас есть вопросы про курс, можно <a href="https://t.me/Alena_Pavlenko_PhD">написать мне в Telegram</a>.</p>
@@ -643,7 +654,7 @@
 
   <footer>
     <div class="container">
-      <p>Курс IFS как лайфстайл · ведёт Алёна Павленко</p>
+      <p>Курс IFS как лайфстайл · Алёна Павленко</p>
     </div>
   </footer>
 </body>
