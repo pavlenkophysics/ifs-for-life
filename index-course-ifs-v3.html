@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Курс IFS как лайфстайл — Алёна Павленко</title>
+  <meta name="description" content="6-недельный курс по IFS для жизни: Classic и Evolving IFS, демо и практика внедрения в повседневность. Ведёт Алёна Павленко, эксперт и куратор IFS Academy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --bg-alt: #fffcf7;
+      --bg-dark: #2d3d28;
+      --bg-dark-soft: #3d5038;
+      --text: #2c3028;
+      --text-inverse: #f7f5f0;
+      --muted: #5a6354;
+      --accent: #6b9e5a;
+      --accent-hover: #5a8c4a;
+      --accent-soft: #b8d4a8;
+      --accent-2: #f2e89e;
+      --accent-2-hover: #e8de7a;
+      --accent-2-soft: #faf6dc;
+      --border: #e0ddd4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 3.1rem);
+      margin: 0 0 1rem;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 0 0 1.25rem;
+      padding-left: 0.75rem;
+      border-left: 4px solid var(--accent);
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-alt {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-dark {
+      background: var(--bg-dark-soft);
+      color: var(--text-inverse);
+    }
+    .section-dark h2 {
+      border-left-color: var(--accent-2);
+      color: var(--accent-2-soft);
+    }
+    .section-dark .section-heading-note {
+      color: #c8d4c4;
+    }
+    .section-dark p,
+    .section-dark li {
+      color: #f0efe8;
+    }
+
+    /* HERO */
+    .hero {
+      background: radial-gradient(circle at top left, rgba(242,232,158,0.25), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(107,158,90,0.18), transparent 55%),
+                  var(--bg-dark);
+      color: var(--text-inverse);
+      padding: 4.5rem 0 4rem;
+      text-align: left;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.22);
+      color: var(--accent-2-soft);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      margin: 0 0 1rem;
+      color: #ebe6d8;
+    }
+
+    .hero-note {
+      margin: 0;
+      font-size: 0.98rem;
+      color: #e2ddcf;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.05s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--text-inverse);
+      border-color: rgba(0,0,0,0.12);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-cta {
+      background: var(--accent-2);
+      color: var(--text);
+      border: none;
+      padding: 0.95rem 2rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.12), 0 6px 12px rgba(0,0,0,0.08);
+    }
+    .btn-cta:hover {
+      background: var(--accent-2-hover);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.1);
+      transform: translateY(2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-2-soft);
+      border-color: rgba(250,246,232,0.7);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0,0,0,0.16);
+    }
+
+    .hero-meta {
+      font-size: 0.9rem;
+      color: #d4cfc4;
+      margin-top: 0.75rem;
+    }
+
+    .hero-host {
+      margin-top: 1.75rem;
+      font-size: 0.95rem;
+      color: #e8e4d8;
+    }
+
+    .hero-host strong {
+      font-weight: 600;
+    }
+
+    /* GENERIC TEXT */
+    p {
+      margin: 0 0 1rem;
+    }
+
+    ul.bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.bullets li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    ul.bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--accent);
+      transform: rotate(45deg);
+    }
+
+    .section-heading-note {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .section-divider {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    #waitlist {
+      padding: 2.5rem 0;
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* GRID SECTIONS */
+    .two-column {
+      display: grid;
+      gap: 2rem;
+    }
+
+    @media (min-width: 720px) {
+      .two-column {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: 12px;
+      background: var(--accent-2-soft);
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.5rem;
+    }
+
+    .badge-soft {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: var(--accent-soft);
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    /* PROGRAM + TIMELINE */
+    .program-list {
+      margin: 1.25rem 0 0;
+      padding: 0;
+      list-style: none;
+      position: relative;
+    }
+
+    .program-list::before {
+      content: '';
+      position: absolute;
+      left: 0.6rem;
+      top: 0.2rem;
+      bottom: 0.2rem;
+      width: 2px;
+      background: var(--accent-soft);
+    }
+
+    .program-item {
+      padding: 1rem 0 1.1rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      padding-left: 2.2rem;
+    }
+
+    .program-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .program-item::before {
+      content: '';
+      position: absolute;
+      left: 0.05rem;
+      top: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg);
+    }
+
+    .program-week {
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.2rem;
+    }
+
+    .program-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    /* QUOTES */
+    .quotes {
+      margin-top: 1.5rem;
+    }
+
+    .quote {
+      border-left: 3px solid var(--accent-soft);
+      padding-left: 1rem;
+      margin: 0 0 1.1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+
+    .quote-source {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: -0.4rem;
+      margin-bottom: 0.8rem;
+      padding-left: 1.1rem;
+    }
+
+    /* TEACHER / PHOTO */
+    .teacher-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 4px solid var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .teacher-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hello-inner {
+      display: grid;
+      gap: 1.75rem;
+      align-items: center;
+    }
+    @media (min-width: 720px) {
+      .hello-inner {
+        grid-template-columns: minmax(0, 1.6fr) auto;
+      }
+    }
+
+    .hello-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--accent);
+      background: var(--accent-soft);
+    }
+    .hello-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .teacher-meta {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* PRICE / FOOTER */
+    .price-main {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-note {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    footer {
+      padding: 2.5rem 0 3rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      background: var(--bg-alt);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div>
+            <div class="hero-badge"><span class="hero-badge-dot"></span> Онлайн-курс · 6 недель · 2 встречи в неделю</div>
+            <h1>IFS как лайфстайл</h1>
+            <p class="hero-subtitle">Курс для тех, кто хочет познакомиться с IFS как образом жизни и начать опираться на него в повседневных ситуациях.</p>
+            <p class="hero-note">Стоимость: 300 € · онлайн · группа до 14 человек</p>
+            <p class="hero-meta">6 недель · 12 встреч · поддерживающий чат.</p>
+            <div class="hero-cta">
+              <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
+              <a href="#program" class="btn btn-secondary">Посмотреть программу</a>
+            </div>
+            <p class="hero-host">Курс ведёт <strong>Алёна Павленко</strong>, эксперт и куратор IFS Academy, PhD, 350+ часов телесной практики.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="hello">
+      <div class="container">
+        <div class="hello-inner">
+          <div class="hello-text">
+            <h2>Привет, я Алёна</h2>
+            <p><strong>До IFS я была в терапии уже несколько лет</strong>, пробовала разные методы и практики. Было ощущение, что я много знаю и понимаю, но в повседневную жизнь это либо не внедрялось, либо внедрялось со скрипом — и внутри появлялся новый критик, который говорил: «Мы же уже знаем, как этот паттерн устроен, почему мы снова здесь?»</p>
+            <p><strong>IFS зацепил меня тем, что здесь нет «плохих» частей, от которых нужно избавляться</strong>, и тем, как через живое любопытство и практику он довольно естественно встроился в мою жизнь. Для меня IFS оказал колоссальное влияние на уровень удовлетворённости своей жизнью: стало меньше внутренней войны и больше пространства, чтобы действительно реализовывать свой потенциал, а не тратить его на борьбу с собой. На основе этого опыта и двух лет обучения и практики в IFS Academy (More Self) родилась идея этого курса.</p>
+          </div>
+          <div class="hello-photo">
+            <img src="images/DSCF3599-cropped.jpg" alt="Алёна Павленко">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="for-whom" class="section-alt">
+      <div class="container">
+        <h2>Для кого этот курс</h2>
+        <p>Если вы давно присматриваетесь к IFS и ищете, как опереться на него в повседневности:</p>
+        <ul class="bullets">
+          <li>Вы читаете книги и посты про IFS, может быть, слушали лекции или подкасты — модель откликается, но непонятно, как связать её с очень конкретными ситуациями дня и моментами «меня снова накрыло».</li>
+          <li>Чувствуете, что у вас внутри есть свои части — та, что всё контролирует, та, что устала, та, что хочет «всё бросить» — и хочется выстроить с ними более тёплые и честные отношения.</li>
+          <li>Думаете о терапии по IFS (или уже в ней), но хотите отдельное пространство, где можно спокойно разложить модель по полочкам и примерить на свою жизнь.</li>
+          <li>Любите понимать, как всё устроено, но от одного понимания изменений мало — нужен формат, который помогает переводить понимание в действия.</li>
+        </ul>
+        <p class="muted" style="font-size:0.85rem; margin-top:1rem;">*Это курс «для себя»: он не является обучением методу для профессиональной работы как помогающий практик.</p>
+      </div>
+    </section>
+
+    <section id="ifs" class="section-dark">
+      <div class="container">
+        <h2>Classic и Evolving IFS простыми словами</h2>
+        <p><strong>IFS (Internal Family Systems)</strong> смотрит на нас как на систему частей: установок, паттернов, реакций, мыслей. Всё это здесь называется частями. У каждой части есть благое намерение — она по‑своему пытается помочь системе, даже если способ, которым она это делает, не всегда гармоничен для всей системы.</p>
+        <p>В центре — состояние <strong>Self</strong>, из которого можно с любопытством и уважением замечать части, слышать, что для них важно, и искать решения, которые учитывают всю систему, а не только одну часть.</p>
+        <div class="card" style="margin-top: 1.75rem; background: rgba(184,212,168,0.35); border-color: rgba(255,255,255,0.25);">
+          <div class="badge-soft">Evolving IFS</div>
+          <p><strong>Evolving IFS</strong> — развитие классического IFS с фокусом на состоянии: в каком состоянии вы в контакте и с собой, и с частью; что происходит с телом; насколько безопасно и достаточно ли поддержки в моменте. Важно не только «что делаем», но и «в каком состоянии это происходит».</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="section-alt">
+      <div class="container">
+        <h2>Программа 6 недель</h2>
+        <ul class="program-list">
+          <li class="program-item">
+            <div class="program-week">Неделя 1</div>
+            <div class="program-title">Карта IFS: части, Self, система</div>
+            <p>Что такое IFS: части, система, Self. Какие бывают части, зачем они вообще появляются, и как на это смотреть так, чтобы не превращать себя в проект по починке.</p>
+          </li>
+          <li class="program-item">
+            <div class="program-week">Неделя 2</div>
+            <div class="program-title">Self и состояние</div>
+            <p>Как вы узнаёте своё Self‑состояние, чем оно отличается от «идеальной версии себя». Зачем в Evolving IFS столько внимания состоянию, телу и ощущению безопасности.</p>
+          </li>
+          <li class="program-item">
+            <div class="program-week">Неделя 3</div>
+            <div class="program-title">Знакомство с частями: первые шаги диалога и 6F</div>
+            <p>Как «находить» часть в моменте и вступать с ней в контакт. Разбираем базовый протокол 6F: по шагам знакомимся с частью и узнаём, что для неё важно.</p>
+          </li>
+          <li class="program-item">
+            <div class="program-week">Неделя 4</div>
+            <div class="program-title">Изгнанники: кто они и как с ними быть</div>
+            <p>Кто такие изгнанники в IFS, как понять, что сейчас поднимается именно изгнанник, а не просто «плохое настроение». Говорим о том, как быть с этим бережно: на что опираться, чего не делать в одиночку и когда лучше привлекать терапевта.</p>
+          </li>
+          <li class="program-item">
+            <div class="program-week">Неделя 5</div>
+            <div class="program-title">Отношения через призму частей</div>
+            <p>Внутренние и внешние отношения: критик, достигатор, перфекционист, близкие, семья, работа. Смотрим, как наши части встречаются с частями других людей и что помогает чуть мягче обходиться и с собой, и с окружающими.</p>
+          </li>
+          <li class="program-item">
+            <div class="program-week">Неделя 6</div>
+            <div class="program-title">Интеграция и свои IFS-инструменты на дальше</div>
+            <p>Собираем воедино всё, что случилось за эти недели. Формируем ваш личный набор опор, инструментов и практик, с которыми вы пойдёте дальше — чтобы IFS оставался не только в теориях, но и в повседневности.</p>
+          </li>
+        </ul>
+        <p style="margin-top: 2rem;">
+          <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section-dark">
+      <div class="container">
+        <h2>Как меняется жизнь, когда появляется язык частей</h2>
+        <div class="quotes">
+          <details open>
+            <summary class="section-heading-note" style="margin-top:0; margin-bottom:0.5rem; cursor:pointer; color: var(--accent-2);">Личные отношения и ощущение себя</summary>
+            <p class="quote">«Для меня это как будто новый уровень осознанности, новый слой открывается. Когда в моменте осознаешь часть, которая тебя захватывает, ты можешь с ней разъединиться, и тогда появляется больше ясности.»</p>
+            <p class="quote">«Стало меньше реактивной реакции. Вместо того чтобы действовать как хочет протектор, я замедляюсь, даю ему пространство внутри позлиться, и только потом начинаю что-то делать. В итоге вместо большой ссоры с мужем на неделю получился живой и классный диалог.»</p>
+            <p class="quote">«Больше появилось сострадания к своим частям, соответственно, и к другим людям тоже. Это меняет отношения с близкими.»</p>
+          </details>
+          <details style="margin-top:1.5rem;">
+            <summary class="section-heading-note" style="margin-top:0; margin-bottom:0.5rem; cursor:pointer; color: var(--accent-2);">Бизнес и работа</summary>
+            <p class="quote">«В диалоге с деловыми партнёрами я объясняю через части, почему я хочу чего-то конкретным образом. Это помогает снизить напряжённость, особенно когда у тебя есть часть-перфекционист, которой надо, чтобы всё было идеально.»</p>
+            <p class="quote">«В бизнесе, когда ты с партнёром можешь говорить на этом языке, можно избегать очень многих конфликтов.»</p>
+            <p class="quote">«С коллегами в рабочей коммуникации общение через контекст частей сильно снижает градус обсуждения — появляется понимание, что в разговоре реагирует конкретная часть, а не весь человек… это делает разговор более экологичным.»</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="price" class="section-alt">
+      <div class="container">
+        <div>
+          <h2>Формат и стоимость</h2>
+          <p class="price-main">Стоимость курса — 300 €.</p>
+          <p class="price-note">Оплата возможна в евро или в рублях.</p>
+          <ul class="bullets" style="margin-top: 1.25rem;">
+            <li><strong>6 недель · 12 встреч · старт курса 5 апреля · старт продаж 21 марта.</strong></li>
+            <li><strong>Вторник и четверг, 12:00–13:30</strong> по Португалии (14:00–15:30 по Москве).</li>
+            <li>Zoom, группа до 14 человек.</li>
+            <li>Одна встреча в неделю — теория и демо, вторая — практика в парах.</li>
+            <li>Задания между встречами и чат для вопросов по IFS.</li>
+          </ul>
+          <div class="card" style="margin-top: 1.5rem; border-color: var(--accent-soft); background: var(--accent-2-soft);">
+            <div class="badge-soft">Как получить от курса максимум</div>
+            <p><strong>Этот курс принесёт максимум пользы, если вы готовы быть в нём присутствующими:</strong> приходить на встречи с камерой, быть вниманием в процессе, участвовать в практике в парах и, если вдруг пропустили встречу, нагонять в течение недели.</p>
+            <p>Смотрите на этот курс как на инвестицию в себя: она отрабатывает, когда вы не слушаете его фоном, а действительно даёте себе это время. Если сейчас у вас нет ресурса на такую включённость — можно бережно отложить участие и прийти в один из следующих потоков.</p>
+          </div>
+          <p style="margin-top: 1.75rem;">
+            <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="teacher">
+      <div class="container">
+        <div>
+          <p class="section-heading-note">Ведущая курса Алёна Павленко</p>
+          <h2>Мой путь и опыт</h2>
+          <p>По первой профессии я физик, PhD: аспирантура в Германии, постдоки в США и Великобритании, потом стратегический консалтинг (Deloitte) в Голландии. Всю жизнь меня интересовали сложные системы и то, как сделать так, чтобы они работали.</p>
+          <p>В эту работу я пришла не по плану. Сначала были годы своей терапии, потом 350+ часов телесной практики — баня, массаж, работа с телом и состоянием. Потом появился IFS, работа с частями и Self. То, что помогало мне самой, было естественным для меня — осваивала глубоко. Метод дал мне колоссальный результат и внедрился в мою жизнь, заметно повысив уровень удовлетворённости. Со временем стали обращаться: сначала по телу и состоянию, потом по IFS.</p>
+          <p>IFS в мою жизнь пришёл через <strong><a href="https://www.healingandawakening.institute/about" target="_blank" rel="noopener noreferrer">Гэтри Сайена</a></strong>. Я два года училась у него, прошла курс Ричарда Шварца IFS and Spirituality, а сейчас вхожу в команду IFS Academy (More Self). Там моя роль — не только быть экспертом и куратором, но и помогать людям реально интегрировать метод в жизнь.</p>
+          <p>Этот курс — продолжение всего этого пути. Он про то, как IFS может стать вашим языком и опорой в обычной, неидеальной человеческой жизни.</p>
+        </div>
+        <div>
+          <div class="teacher-photo">
+            <img src="images/photo_2026-03-03_09-41-25.jpg" alt="Алёна Павленко и Гэтри Сайен">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="waitlist">
+      <div class="container">
+        <div>
+          <p class="section-heading-note">Следующий шаг</p>
+          <h2>Запишитесь в вейтлист</h2>
+          <p>Старт курса — 5 апреля. Старт продаж — 21 марта. Чат откроется за неделю до старта курса. Чтобы попасть в вейтлист, заполните форму по ссылке ниже.</p>
+          <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
+          <p style="margin-top: 1.25rem;">Если у вас есть вопросы про курс, можно <a href="https://t.me/Alena_Pavlenko_PhD">написать мне в Telegram</a>.</p>
+          <a href="https://t.me/Alena_Pavlenko_PhD" class="btn btn-secondary" style="margin-top:0.75rem;">Написать в Telegram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Курс IFS как лайфстайл · ведёт Алёна Павленко</p>
+    </div>
+  </footer>
+</body>
+</html>
