@@ -1,763 +1,1549 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Части целого — практическая группа по IFS · Алёна Павленко</title>
-  <meta name="description" content="Практическая группа по IFS: 6 недель, Classic и Evolving IFS, демо и практика внедрения в повседневность. Ведёт Алёна Павленко, эксперт и куратор IFS Academy.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f8fcf9;
-      --bg-alt: #fefef8;
-      --bg-dark: #0d5c63;
-      --bg-dark-soft: #1a6b6b;
-      --text: #1c2a2a;
-      --text-inverse: #f5faf8;
-      --muted: #4a5c5a;
-      --accent: #1a6b6b;
-      --accent-hover: #0d5c63;
-      --accent-soft: #7eb8b5;
-      --accent-2: #e8e858;
-      --accent-2-hover: #d4d030;
-      --accent-2-soft: #fefce8;
-      --border: #d0e2e0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Части целого — практическая группа по IFS · Алёна Павленко</title>
+<meta name="description" content="Практическая группа по IFS для тех, кто хочет встроить практику в жизнь. 6 недель, 12 встреч, онлайн. Ведёт Алёна Павленко.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   CSS CUSTOM PROPERTIES
+   ═══════════════════════════════════════════ */
+:root {
+  --bg: #f8fcf9;
+  --bg-alt: #fefef8;
+  --bg-dark: #0d5c63;
+  --bg-dark-soft: #1a6b6b;
+  --text: #162422;
+  --text-inverse: #f5faf8;
+  --muted: #3d514f;
+  --accent: #1a6b6b;
+  --accent-hover: #0d5c63;
+  --accent-soft: #7eb8b5;
+  --accent-2: #e8e858;
+  --accent-2-hover: #d4d030;
+  --accent-2-soft: #fefce8;
+  --border: #b8d4d0;
+  --gold: #C4A265;
+  --light-gold: #D4B678;
+  --hero-bg: linear-gradient(160deg, #0d5c63 0%, #1a6b6b 50%, #0d5c63 100%);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-border: rgba(126, 184, 181, 0.35);
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+/* ═══════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-    body {
-      margin: 0;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--text);
-      background: transparent;
-    }
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  background: var(--bg);
+  font-weight: 400;
+}
 
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      line-height: 1.2;
-    }
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  color: var(--bg-dark);
+  line-height: 1.3;
+}
 
-    h1 {
-      font-size: clamp(2.1rem, 5vw, 3.1rem);
-      margin: 0 0 1rem;
-    }
+h2 { color: var(--accent-hover); }
 
-    h2 {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      margin: 0 0 1.25rem;
-      padding-left: 0.75rem;
-      border-left: 4px solid var(--accent);
-    }
+h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; margin-bottom: 1rem; }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 600; }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+p { font-size: 1.02rem; }
 
-    section {
-      padding: 4rem 0;
-    }
+a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--gold); }
 
-    .section-alt {
-      background: var(--bg-alt);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
+img { max-width: 100%; height: auto; display: block; }
 
-    .section-dark {
-      background: var(--bg-dark-soft);
-      color: var(--text-inverse);
-    }
-    .section-dark h2 {
-      border-left-color: var(--accent-2);
-      color: var(--accent-2-soft);
-    }
-    .section-dark .section-heading-note {
-      color: #b8d4d2;
-    }
-    .section-dark p,
-    .section-dark li {
-      color: #e8f4f2;
-    }
+strong { color: var(--text); }
 
-    /* HERO — лимон + тёмная бирюза */
-    .hero {
-      background: radial-gradient(circle at top left, rgba(254,252,230,0.2), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(126,184,181,0.25), transparent 55%),
-                  var(--bg-dark);
-      color: var(--text-inverse);
-      padding: 4.5rem 0 4rem;
-      text-align: left;
-    }
+/* ═══════════════════════════════════════════
+   BACKGROUND LAYERS
+   ═══════════════════════════════════════════ */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
 
-    .hero-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
+.bg-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(240, 247, 245, 0.6) 0%, rgba(224, 240, 238, 0.5) 50%, rgba(248, 252, 249, 0.55) 100%);
+  z-index: 0;
+}
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.2rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.22);
-      color: var(--accent-2-soft);
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
+/* ═══════════════════════════════════════════
+   NAVIGATION DOTS
+   ═══════════════════════════════════════════ */
+.nav-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-    .hero-badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent-2);
-    }
+.nav-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none; padding: 0;
+}
 
-    .hero-tagline {
-      font-size: 1.1rem;
-      margin: -0.25rem 0 0.75rem;
-      color: var(--accent-2-soft);
-      font-weight: 500;
-    }
-    .hero-subtitle {
-      font-size: 1.15rem;
-      margin: 0 0 1rem;
-      color: #d8ebe8;
-    }
+.nav-dot:hover { opacity: 0.8; transform: scale(1.3); }
 
-    .hero-intro {
-      margin: 0 0 1rem;
-      font-size: 1rem;
-      color: #d0e4e2;
-      line-height: 1.5;
-    }
-    .hero-note {
-      margin: 0;
-      font-size: 0.98rem;
-      color: #c8e0de;
-    }
+.nav-dot.active {
+  background: var(--accent-2);
+  opacity: 1;
+  transform: scale(1.4);
+  box-shadow: 0 0 8px rgba(232, 232, 88, 0.4);
+}
 
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.75rem;
-    }
+/* ═══════════════════════════════════════════
+   SECTIONS (COMMON)
+   ═══════════════════════════════════════════ */
+.section {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px;
+}
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.75rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.98rem;
-      text-decoration: none;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.05s ease;
-    }
+.section-inner { max-width: 800px; width: 100%; }
 
-    .btn-primary {
-      background: var(--accent);
-      color: var(--text-inverse);
-      border-color: rgba(0,0,0,0.12);
-    }
+/* Alternating soft tint on even sections */
+.section:nth-child(even of .section) {
+  background: rgba(13, 92, 99, 0.04);
+}
 
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-    }
+.section-divider {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  margin: 0 auto 40px;
+  border-radius: 2px;
+}
 
-    .btn-cta {
-      background: var(--accent-2);
-      color: var(--text);
-      border: none;
-      padding: 0.95rem 2rem;
-      font-size: 1.05rem;
-      box-shadow: 0 4px 0 rgba(0,0,0,0.12), 0 6px 12px rgba(0,0,0,0.08);
-    }
-    .btn-cta:hover {
-      background: var(--accent-2-hover);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.1);
-      transform: translateY(2px);
-    }
+.section-subtitle {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
 
-    .btn-secondary {
-      background: transparent;
-      color: var(--accent-2-soft);
-      border-color: rgba(254,252,232,0.7);
-    }
+/* ═══════════════════════════════════════════
+   GLASS CARD
+   ═══════════════════════════════════════════ */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 4px 20px rgba(13, 92, 99, 0.08), 0 1px 4px rgba(13, 92, 99, 0.05);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
 
-    .btn-secondary:hover {
-      background: rgba(0,0,0,0.16);
-    }
+/* Expanding line from center on hover */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  transition: width 0.4s ease, left 0.4s ease;
+}
 
-    .hero-meta {
-      font-size: 0.9rem;
-      color: #c0d8d6;
-      margin-top: 0.75rem;
-    }
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(13, 92, 99, 0.16), 0 2px 8px rgba(13, 92, 99, 0.08);
+}
 
-    .hero-host {
-      margin-top: 1.75rem;
-      font-size: 0.95rem;
-      color: #d8e8e6;
-    }
+.glass-card:hover::after {
+  width: 100%;
+  left: 0;
+}
 
-    .hero-host strong {
-      font-weight: 600;
-    }
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+.animate-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
 
-    /* GENERIC TEXT */
-    p {
-      margin: 0 0 1rem;
-    }
+.animate-in.visible { opacity: 1; transform: translateY(0); }
 
-    ul.bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.25s; }
+.delay-3 { transition-delay: 0.4s; }
+.delay-4 { transition-delay: 0.55s; }
+.delay-5 { transition-delay: 0.7s; }
+.delay-6 { transition-delay: 0.85s; }
 
-    ul.bullets li {
-      position: relative;
-      padding-left: 1.4rem;
-      margin-bottom: 0.8rem;
-    }
+/* ═══════════════════════════════════════════
+   CTA BUTTONS
+   ═══════════════════════════════════════════ */
+.cta-primary {
+  display: inline-block;
+  background: var(--bg-dark);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 1rem; font-weight: 500;
+  padding: 16px 40px;
+  border-radius: 50px;
+  border: none; cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
 
-    ul.bullets li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.55rem;
-      width: 7px;
-      height: 7px;
-      border-radius: 2px;
-      background: var(--accent);
-      transform: rotate(45deg);
-    }
+.cta-primary:hover {
+  background: var(--accent); color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 58, 74, 0.25);
+}
 
-    .section-heading-note {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
+.cta-secondary {
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 1rem; font-weight: 500;
+  padding: 16px 40px;
+  border-radius: 50px;
+  border: 2px solid rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
 
-    .about-block-label {
-      margin: 1.5rem 0 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .about-block-label:first-of-type {
-      margin-top: 0.75rem;
-    }
+.cta-secondary:hover {
+  border-color: var(--gold); color: var(--gold);
+  transform: translateY(-2px);
+}
 
-    .about-block {
-      padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-      background: #fff;
-      border-radius: 10px;
-      border-left: 4px solid var(--accent-soft);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    }
-    .about-block p:last-child {
-      margin-bottom: 0;
-    }
+.cta-gold {
+  display: inline-block;
+  background: var(--accent-2);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.1rem; font-weight: 700;
+  padding: 18px 48px;
+  border-radius: 50px;
+  border: none; cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(232, 232, 88, 0.3);
+}
 
-    .muted {
-      color: var(--muted);
-    }
+.cta-gold:hover {
+  background: var(--accent-2-hover);
+  color: var(--text); transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232, 232, 88, 0.45);
+}
 
-    .section-divider {
-      border: 0;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
+/* ═══════════════════════════════════════════
+   HERO — two-column layout
+   ═══════════════════════════════════════════ */
+.hero-section {
+  min-height: 100vh;
+  padding: 60px 40px;
+  background: var(--hero-bg);
+  color: #fff;
+  text-align: left;
+}
 
-    #waitlist {
-      padding: 2.5rem 0;
-      border-top: 2px solid var(--accent);
-      border-bottom: 2px solid var(--accent);
-    }
+.hero-section .section-inner {
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+}
 
-    /* GRID SECTIONS */
-    .two-column {
-      display: grid;
-      gap: 2rem;
-    }
+.hero-section h1, .hero-section h2, .hero-section h3 { color: #fff; }
 
-    @media (min-width: 720px) {
-      .two-column {
-        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      }
-    }
+.hero-left { text-align: left; }
 
-    .card {
-      border-radius: 12px;
-      background: var(--accent-2-soft);
-      border: 1px solid var(--border);
-      padding: 1.4rem 1.5rem;
-    }
-    .card p:last-child {
-      margin-bottom: 0;
-    }
-    .card-evolving {
-      background: rgba(254,252,232,0.95) !important;
-      border-color: rgba(232,232,88,0.5) !important;
-    }
-    .card-maximum {
-      background: #e8f4f2;
-      border-color: var(--accent-soft);
-    }
-    .card-individual {
-      background: #e0f2f0;
-      border: 2px solid var(--accent-soft);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .card-individual p:last-child {
-      margin-bottom: 0;
-    }
-    .section-dark .card-evolving p {
-      color: var(--text);
-    }
+.hero-badge {
+  display: inline-block;
+  background: rgba(232, 232, 88, 0.15);
+  color: var(--accent-2);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 30px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(232, 232, 88, 0.3);
+}
 
-    .badge-soft {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.2rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      background: var(--accent-soft);
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
+.hero-left h1 {
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
 
-    /* PROGRAM + TIMELINE */
-    .program-list {
-      margin: 1.25rem 0 0;
-      padding: 0;
-      list-style: none;
-      position: relative;
-    }
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
 
-    .program-list::before {
-      content: '';
-      position: absolute;
-      left: 0.6rem;
-      top: 0.2rem;
-      bottom: 0.2rem;
-      width: 2px;
-      background: var(--accent-soft);
-    }
+/* SVG illustration — parts of a whole */
+.hero-illustration {
+  width: 160px; height: 160px;
+  animation: float 6s ease-in-out infinite;
+}
 
-    .program-item {
-      padding: 1rem 0 1.1rem;
-      border-top: 1px solid var(--border);
-      position: relative;
-      padding-left: 2.2rem;
-    }
+.hero-illustration circle {
+  transition: opacity 0.5s ease;
+}
 
-    .program-item:first-child {
-      border-top: none;
-      padding-top: 0;
-    }
+.hero-illustration:hover circle { opacity: 0.85; }
+.hero-illustration:hover .ill-center { opacity: 1; }
 
-    .program-item::before {
-      content: '';
-      position: absolute;
-      left: 0.05rem;
-      top: 1.1rem;
-      width: 1.1rem;
-      height: 1.1rem;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      background: var(--bg);
-    }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
-    .program-week {
-      font-size: 0.95rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.2rem;
-    }
+/* Left column — hook + solution text */
+.hero-left .hero-pain {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+  font-weight: 400;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
 
-    .program-title {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
+.hero-left .hero-copy {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
 
-    /* QUOTES */
-    .quotes {
-      margin-top: 1.5rem;
-    }
+.hero-left .hero-accent {
+  font-size: 0.95rem;
+  color: var(--accent-2);
+  font-style: normal;
+  border-left: 2px solid var(--accent-2);
+  padding-left: 16px;
+  margin-top: 20px;
+  line-height: 1.6;
+}
 
-    .quote {
-      border-left: 3px solid var(--accent-soft);
-      padding-left: 1rem;
-      margin: 0 0 1.1rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-style: italic;
-    }
+/* Right column — signup card */
+.hero-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 232, 88, 0.25);
+  border-top: 3px solid var(--accent-2);
+  border-radius: 24px;
+  padding: 36px 32px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15), 0 0 60px rgba(232, 232, 88, 0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
 
-    .quote-source {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-top: -0.4rem;
-      margin-bottom: 0.8rem;
-      padding-left: 1.1rem;
-    }
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(232, 232, 88, 0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
 
-    /* TEACHER / PHOTO */
-    .teacher-photo {
-      border-radius: 16px;
-      overflow: hidden;
-      border: 4px solid var(--accent);
-      background: var(--accent-soft);
-    }
+.hero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2), 0 0 80px rgba(232, 232, 88, 0.12);
+  border-color: rgba(232, 232, 88, 0.45);
+}
 
-    .teacher-photo img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+.hero-card:hover::before {
+  opacity: 1;
+}
 
-    .hello-inner {
-      display: grid;
-      gap: 1.75rem;
-      align-items: start;
-      grid-template-columns: auto 1fr;
-      grid-template-areas: "hello-photo hello-text";
-    }
-    @media (max-width: 560px) {
-      .hello-inner {
-        grid-template-columns: 1fr;
-        grid-template-areas: "hello-photo" "hello-text";
-        justify-items: center;
-      }
-      .hello-text h2 { padding-left: 0; border-left: none; }
-    }
+.hero-card-label {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 20px;
+}
 
-    .hello-photo {
-      grid-area: hello-photo;
-      width: 180px;
-      height: 180px;
-      min-width: 180px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--accent-2);
-      box-shadow: 0 0 0 3px var(--accent);
-      background: var(--accent-soft);
-    }
-    .hello-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .hello-text {
-      grid-area: hello-text;
-      min-width: 0;
-    }
+.hero-card-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-bottom: 24px;
+}
 
-    .teacher-meta {
-      font-size: 0.92rem;
-      color: var(--muted);
-      margin-top: 0.5rem;
-    }
+.hero-card-detail {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-    /* PRICE / FOOTER */
-    .price-main {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
+.hero-card-detail svg {
+  width: 16px; height: 16px;
+  stroke: var(--accent-soft);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
 
-    .price-note {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
+.hero-card-price {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
 
-    footer {
-      padding: 2.5rem 0 3rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.9rem;
-      color: var(--muted);
-      text-align: center;
-      background: var(--bg-alt);
-    }
+.hero-card-price-note {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 28px;
+}
 
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+.hero-card .cta-gold {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  padding: 14px 36px;
+}
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+.hero-card .cta-secondary {
+  font-size: 0.9rem;
+  padding: 12px 28px;
+}
 
-    .puzzle-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .puzzle-bg svg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  </style>
+.hero-card-author {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+}
+
+.hero-card-author strong { color: rgba(255, 255, 255, 0.85); }
+
+/* ═══════════════════════════════════════════
+   ABOUT (Привет, я Алёна)
+   ═══════════════════════════════════════════ */
+.about-section .section-inner { text-align: center; max-width: 900px; }
+
+.about-top {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.about-top-left { flex-shrink: 0; text-align: center; }
+
+.author-photo {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-soft);
+  box-shadow: 0 8px 32px rgba(13, 92, 99, 0.15);
+  margin-bottom: 12px;
+}
+
+.about-top-left .section-subtitle { margin-bottom: 0; }
+
+.about-top-right p { font-size: 0.95rem; margin-bottom: 14px; line-height: 1.7; }
+
+.about-text { text-align: left; }
+.about-text p { margin-bottom: 16px; }
+
+.about-closing {
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.about-accent {
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 1.1rem;
+  color: var(--bg-dark);
+  border-left: 4px solid var(--accent-2);
+  padding: 20px 24px;
+  margin: 28px 0;
+  background: var(--accent-2-soft);
+  border-radius: 0 16px 16px 0;
+  position: relative;
+}
+
+.about-accent::before {
+  content: '\201C';
+  position: absolute;
+  top: 8px; left: 10px;
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--accent-2);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+
+/* ═══════════════════════════════════════════
+   AUDIENCE (Для кого)
+   ═══════════════════════════════════════════ */
+.audience-section .section-inner { text-align: center; }
+
+.audience-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 36px;
+}
+
+.audience-card {
+  text-align: left;
+  padding: 20px 24px 20px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s ease, padding-left 0.3s ease;
+  overflow: visible;
+}
+
+.audience-card::after { display: none; }
+
+.audience-card:first-child { border-top: 1px solid var(--border); }
+
+.audience-card:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(13, 92, 99, 0.03);
+  padding-left: 28px;
+}
+
+.audience-icon {
+  width: 36px; height: 36px;
+  min-width: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audience-icon svg {
+  width: 22px; height: 22px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease;
+}
+
+.audience-card:hover .audience-icon svg {
+  stroke: var(--accent-2);
+}
+
+.audience-card p { font-size: 0.98rem; line-height: 1.65; }
+
+.audience-note {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-style: normal;
+  margin-top: 28px;
+}
+
+/* ═══════════════════════════════════════════
+   IFS EXPLAINED
+   ═══════════════════════════════════════════ */
+.ifs-section .section-inner { text-align: center; }
+
+.ifs-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.ifs-card { text-align: left; border-left: 4px solid var(--accent); transition: border-left-color 0.3s ease, background 0.3s ease, transform 0.4s ease, box-shadow 0.4s ease; }
+.ifs-card h3 { margin-bottom: 12px; transition: color 0.3s ease; }
+.ifs-card p { font-size: 0.95rem; }
+
+.ifs-card:hover { border-left-color: var(--accent-2); }
+.ifs-card:hover h3 { color: var(--accent); }
+
+.ifs-card.ifs-evolving {
+  border-left-color: var(--accent-2);
+  background: linear-gradient(135deg, rgba(254, 252, 232, 0.5), var(--card-bg));
+}
+
+.ifs-card.ifs-evolving:hover { border-left-color: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   TOGGLE / ACCORDION
+   ═══════════════════════════════════════════ */
+.toggle-section { margin-top: 32px; }
+
+.toggle-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 28px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--bg-dark);
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.toggle-trigger:hover { box-shadow: 0 4px 16px rgba(26, 58, 74, 0.1); }
+.toggle-trigger:hover .toggle-arrow { animation: bounce-arrow 0.6s ease; }
+
+.toggle-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  min-width: 36px;
+  background: var(--bg-dark);
+  color: #fff;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  transition: transform 0.4s ease, background 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.toggle-trigger:hover .toggle-arrow { background: var(--accent); }
+.toggle-trigger.open .toggle-arrow { transform: rotate(180deg); background: var(--accent-2); color: var(--text); }
+
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(4px); }
+  60% { transform: translateY(-2px); }
+}
+
+.toggle-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.toggle-content.open { max-height: 3000px; }
+
+.toggle-inner { padding: 16px 0; }
+
+/* ═══════════════════════════════════════════
+   PROGRAM (Timeline) — inside toggle
+   ═══════════════════════════════════════════ */
+.program-section .section-inner { text-align: center; }
+
+.timeline {
+  position: relative;
+  margin-top: 16px;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-2), var(--accent), var(--accent-2));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -33px; top: 6px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  border: 3px solid var(--accent-2);
+  z-index: 1;
+  box-shadow: 0 0 0 4px rgba(232, 232, 88, 0.2);
+}
+
+.timeline-card { padding: 24px 28px; }
+
+.timeline-card .week-label {
+  font-family: var(--sans);
+  font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.timeline-card h3 { margin-bottom: 10px; font-size: 1.1rem; }
+.timeline-card p { font-size: 0.92rem; line-height: 1.6; }
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+   ═══════════════════════════════════════════ */
+.testimonials-section .section-inner { text-align: center; }
+
+.testimonial-group { margin-top: 32px; margin-bottom: 20px; }
+
+.testimonial-group-title {
+  font-family: var(--sans);
+  font-size: 0.85rem; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.testimonial-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testimonial-card {
+  text-align: left;
+  position: relative;
+  padding-left: 36px;
+}
+
+.testimonial-card::before {
+  content: '\201C';
+  position: absolute;
+  left: 6px; top: 30px;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  color: var(--accent-2);
+  opacity: 0.8;
+  line-height: 1;
+}
+
+.testimonial-card p {
+  font-family: var(--sans);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* ═══════════════════════════════════════════
+   FORMAT & PRICING — clean layout
+   ═══════════════════════════════════════════ */
+.pricing-section .section-inner { text-align: center; }
+
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.format-item {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-top: 3px solid var(--accent-2);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.format-item .format-value {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--bg-dark);
+  margin-bottom: 6px;
+}
+
+.format-item .format-label {
+  font-size: 0.82rem;
+  color: var(--accent);
+  line-height: 1.4;
+}
+
+.format-details-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.format-detail-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: left;
+}
+
+.format-detail-card h4 {
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-family: var(--sans);
+  font-weight: 600;
+}
+
+.format-detail-card p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.format-essence {
+  margin-top: 24px;
+  padding: 28px;
+  background: var(--accent-2-soft);
+  border-radius: 16px;
+  border: 1px solid rgba(232, 232, 88, 0.25);
+  border-left: 4px solid var(--accent-2);
+  text-align: left;
+}
+
+.format-essence p { font-size: 0.95rem; line-height: 1.7; }
+
+.price-block { margin: 36px 0; }
+
+.price-amount {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--bg-dark);
+}
+
+.price-note {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+/* ═══════════════════════════════════════════
+   BIO (Мой путь и опыт)
+   ═══════════════════════════════════════════ */
+.bio-section .section-inner { text-align: center; }
+
+.bio-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.bio-block { text-align: left; }
+
+.bio-label {
+  font-family: var(--sans);
+  font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.bio-block p { font-size: 0.95rem; margin-bottom: 12px; }
+.bio-block p:last-child { margin-bottom: 0; }
+
+.bio-photo {
+  width: 100%; max-width: 500px;
+  margin: 28px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 3px solid rgba(196, 162, 101, 0.3);
+  box-shadow: 0 8px 32px rgba(26, 58, 74, 0.1);
+}
+
+.bio-photo img { width: 100%; display: block; }
+
+/* ═══════════════════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════════════════ */
+.cta-section { text-align: center; }
+.cta-section .section-inner { text-align: center; }
+
+.cta-details {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 16px 0 36px;
+}
+
+.cta-links {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.cta-alt-card {
+  margin-top: 40px;
+  padding: 28px;
+  background: rgba(13, 92, 99, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(13, 92, 99, 0.12);
+  text-align: left;
+}
+
+.cta-alt-card p { font-size: 0.92rem; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.site-footer {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .section { padding: 80px 18px; min-height: auto; }
+  .glass-card { padding: 24px 20px; border-radius: 16px; }
+  .format-grid { grid-template-columns: 1fr; }
+  .format-details-row { grid-template-columns: 1fr; }
+  .hero-section { padding: 40px 18px; }
+  .hero-section .section-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero-left .hero-pain { font-size: 1.15rem; }
+  .hero-illustration { width: 120px; height: 120px; }
+  .hero-card { padding: 28px 20px; }
+  .hero-card-price { font-size: 1.4rem; }
+  .about-top { flex-direction: column; text-align: center; gap: 24px; }
+  .about-top-right { text-align: left; }
+  .author-photo { width: 160px; height: 160px; }
+  .nav-dots { right: 10px; gap: 8px; }
+  .nav-dot { width: 8px; height: 8px; }
+  .timeline { padding-left: 32px; }
+  .timeline::before { left: 10px; }
+  .timeline-dot { left: -28px; width: 12px; height: 12px; }
+  .toggle-trigger { font-size: 1rem; padding: 16px 20px; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 60px 14px; }
+  .glass-card { padding: 20px 16px; }
+  .cta-primary, .cta-secondary, .cta-gold { padding: 14px 32px; font-size: 0.95rem; }
+}
+</style>
 </head>
 <body>
-  <div class="puzzle-bg" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-      <rect width="100" height="100" fill="#f8fcf9"/>
-      <defs>
-        <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
-        </filter>
-      </defs>
-      <g filter="url(#blur)">
-        <ellipse cx="15" cy="25" rx="22" ry="18" fill="#1a6b6b" fill-opacity="0.14"/>
-        <ellipse cx="88" cy="18" rx="18" ry="22" fill="#e8e858" fill-opacity="0.12"/>
-        <ellipse cx="22" cy="78" rx="24" ry="16" fill="#e8e858" fill-opacity="0.11"/>
-        <ellipse cx="82" cy="82" rx="20" ry="24" fill="#1a6b6b" fill-opacity="0.13"/>
-        <circle cx="55" cy="45" r="18" fill="#7eb8b5" fill-opacity="0.12"/>
-        <ellipse cx="50" cy="88" rx="26" ry="14" fill="#1a6b6b" fill-opacity="0.1"/>
-        <ellipse cx="75" cy="35" rx="16" ry="20" fill="#e8e858" fill-opacity="0.1"/>
-      </g>
-    </svg>
-  </div>
-  <main>
-    <header class="hero">
-      <div class="container">
-        <div class="hero-inner">
-          <div>
-            <div class="hero-badge"><span class="hero-badge-dot"></span> Практическая группа · 6 недель · 2 встречи в неделю</div>
-            <h1>Части целого</h1>
-            <p class="hero-tagline">Ты уже целое — с тобой уже всё в порядке. Приходи.</p>
-            <p class="hero-subtitle">Практическая группа для тех, кто задолбался работать над собой и хочет, чтобы в собственных мыслях наконец-то было приятно находиться.</p>
-            <p class="hero-intro">Практика IFS — как спа для психики, приводит к естественному мягкому расслаблению и перезагрузке. Без бесконечных курсов, ретритов и проработок как второй работы. На группе покажу, как встроить это в ваши обычные дни.</p>
-            <p class="hero-note">300 € · 12 встреч · онлайн · до 24 человек · поддерживающий чат</p>
-            <div class="hero-cta">
-              <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
-              <a href="#program" class="btn btn-secondary">Посмотреть программу</a>
-            </div>
-            <p class="hero-host">Ведёт <strong>Алёна Павленко</strong>, эксперт и куратор IFS Academy, PhD, 350+ часов телесной практики.</p>
-          </div>
-        </div>
+
+<!-- ═══════════════ BACKGROUND ═══════════════ -->
+<canvas id="bg-canvas"></canvas>
+<div class="bg-overlay"></div>
+
+<!-- ═══════════════ NAV DOTS ═══════════════ -->
+<nav class="nav-dots" aria-label="Навигация по секциям"></nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO — dark teal bg
+     ═══════════════════════════════════════════ -->
+<section id="section-0" class="section hero-section">
+  <div class="section-inner">
+    <div class="hero-left">
+      <div class="animate-in delay-1">
+        <span class="hero-badge">Практическая группа по IFS</span>
       </div>
-    </header>
-
-    <section id="hello">
-      <div class="container">
-        <div class="hello-inner">
-          <div class="hello-photo">
-            <img src="images/DSCF3599-cropped.jpg" alt="Алёна Павленко">
-          </div>
-          <div class="hello-text">
-            <h2>Привет, я Алёна</h2>
-            <p><strong>До IFS я была в терапии уже несколько лет,</strong> пробовала разные методы и практики. Много понимала головой, но в повседневную жизнь это ложилось со скрипом — и внутри появлялся новый критик: «Мы же уже понимаем этот паттерн, почему мы снова здесь?»</p>
-            <p><strong>IFS зацепил меня тем, что здесь нет «плохих» частей, от которых нужно избавляться,</strong> и тем, как через любопытство и практику он естественно встроился в жизнь. <strong>IFS оказал колоссальное влияние</strong> на уровень удовлетворённости жизнью: стало меньше внутреннего напряжения и больше пространства реализовывать свой потенциал, <strong>а не тратить силы на борьбу с собой</strong>. Из этого опыта, двух лет собственной практики IFS и участия в IFS Academy (More Self) как эксперта и куратора родилась идея этой практической группы.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="for-whom" class="section-alt">
-      <div class="container">
-        <h2>Для кого эта группа</h2>
-        <ul class="bullets">
-          <li>Замечаете внутреннего критика, перфекциониста, достигатора или часть, которая устала всё вывозить — хочется спокойнее внутри, без выгорания.</li>
-          <li>Любите понимать, как всё устроено в мыслях и внутри, но от одного понимания мало — нужен формат, который переводит это в действия.</li>
-          <li>Читаете книги и посты про IFS, слушаете лекции или подкасты — модель откликается, но непонятно, как применять «на себя».</li>
-          <li>Чувствуете, что прежние курсы и проработки отнимали столько сил, что стали второй работой — и хотите иначе.</li>
-        </ul>
-        <p class="muted" style="font-size:0.85rem; margin-top:1rem;">*Это практическая группа «для себя»: она не является обучением методу для профессиональной работы как помогающий практик.</p>
-      </div>
-    </section>
-
-    <section id="ifs" class="section-dark">
-      <div class="container">
-        <h2>Classic и Evolving IFS простыми словами</h2>
-        <p>В <strong>IFS (Internal Family Systems)</strong> на установки, реакции и мысли смотрят как на <strong>части</strong> одной системы. У каждой части свои задачи и благое намерение, даже если способ порой мешает всей системе. В центре модели — состояние <strong>Self</strong>: из него ты знакомишься с частями с любопытством и уважением и выстраиваешь с ними отношения. Описание модели есть в книгах и постах — попробуй и посмотри, как откликнется лично у тебя.</p>
-        <div class="card card-evolving" style="margin-top: 1.75rem;">
-          <p><strong>Evolving IFS</strong> — это развитие классического IFS с фокусом на состоянии. Специальное внимание уделяют тому, в каком состоянии вы в контакте с собой и с частью, что происходит с телом, насколько безопасно и достаточно ли поддержки в моменте. Важно и то, что вы делаете, и то, в каком состоянии это происходит.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="program" class="section-alt">
-      <div class="container">
-        <h2>Программа</h2>
-        <ul class="program-list">
-          <li class="program-item">
-            <div class="program-week">Неделя 1</div>
-            <div class="program-title">Карта IFS: части, Self, система</div>
-            <p>Что такое IFS: части, система, Self. Какие бывают части, зачем они вообще появляются, и как смотреть на это из любопытства и присутствия.</p>
-          </li>
-          <li class="program-item">
-            <div class="program-week">Неделя 2</div>
-            <div class="program-title">Self и состояние</div>
-            <p>Как вы узнаёте своё Self‑состояние, чем оно отличается от «идеальной версии себя» и от частей. Разбираем, зачем в Evolving IFS столько внимания состоянию, телу и ощущению безопасности.</p>
-          </li>
-          <li class="program-item">
-            <div class="program-week">Неделя 3</div>
-            <div class="program-title">Знакомство с частями: первые шаги диалога и 6F</div>
-            <p>Как замечать свои части в моменте и вступать с ними в контакт. Разбираем базовый протокол 6F: по шагам знакомимся с частью и узнаём, что для неё важно.</p>
-          </li>
-          <li class="program-item">
-            <div class="program-week">Неделя 4</div>
-            <div class="program-title">Изгнанники: кто они и как с ними быть</div>
-            <p>Кто такие изгнанники в IFS, как понять, что сейчас поднимается именно изгнанник, а не просто «плохое настроение». Говорим о том, как быть с этим бережно: на что опираться, чего не делать в одиночку и когда лучше привлекать терапевта.</p>
-          </li>
-          <li class="program-item">
-            <div class="program-week">Неделя 5</div>
-            <div class="program-title">Отношения через призму частей</div>
-            <p>Внутренние и внешние отношения: критик, достигатор, перфекционист, близкие, семья, работа. Смотрим, как наши части встречаются с частями других людей и что помогает выстраивать более гармоничные отношения во внутреннем и внешнем мире.</p>
-          </li>
-          <li class="program-item">
-            <div class="program-week">Неделя 6</div>
-            <div class="program-title">Интеграция и свои IFS-инструменты на дальше</div>
-            <p>Собираем воедино всё, что случилось за эти недели. Формируем ваш личный набор опор, инструментов и практик, с которыми вы пойдёте дальше — чтобы IFS оставался не только в теориях, но и в повседневности.</p>
-          </li>
-        </ul>
-        <p style="margin-top: 2rem;">
-          <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
-        </p>
-      </div>
-    </section>
-
-    <section id="testimonials" class="section-dark">
-      <div class="container">
-        <h2>Как меняется жизнь, когда появляется язык частей</h2>
-        <div class="quotes">
-          <details open>
-            <summary class="section-heading-note" style="margin-top:0; margin-bottom:0.5rem; cursor:pointer; color: var(--accent-2);">Личные отношения и ощущение себя</summary>
-            <p class="quote">«Для меня это как будто новый уровень осознанности, новый слой открывается. Когда в моменте осознаешь часть, которая тебя захватывает, ты можешь с ней разъединиться, и тогда появляется больше ясности.»</p>
-            <p class="quote">«Стало меньше реактивной реакции. Вместо того чтобы действовать как хочет протектор, я замедляюсь, даю ему пространство внутри позлиться, и только потом начинаю что-то делать. В итоге вместо большой ссоры с мужем на неделю получился настоящий диалог.»</p>
-            <p class="quote">«Больше появилось сострадания к своим частям, соответственно, и к другим людям тоже. Это меняет отношения с близкими.»</p>
-          </details>
-          <details style="margin-top:1.5rem;">
-            <summary class="section-heading-note" style="margin-top:0; margin-bottom:0.5rem; cursor:pointer; color: var(--accent-2);">Бизнес и работа</summary>
-            <p class="quote">«В диалоге с деловыми партнёрами я объясняю через части, почему я хочу чего-то конкретным образом. Это помогает снизить напряжённость, особенно когда у тебя есть часть-перфекционист, которой надо, чтобы всё было идеально.»</p>
-            <p class="quote">«В бизнесе, когда ты с партнёром можешь говорить на этом языке, можно избегать очень многих конфликтов.»</p>
-            <p class="quote">«С коллегами в рабочей коммуникации общение через контекст частей сильно снижает градус обсуждения — появляется понимание, что в разговоре реагирует конкретная часть, а не весь человек… это делает разговор более экологичным.»</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section id="price" class="section-alt">
-      <div class="container">
-        <div>
-          <h2>Формат и стоимость</h2>
-          <ul class="bullets" style="margin-top: 1.25rem;">
-            <li><strong>6 недель · 12 встреч · старт группы 5 апреля · старт продаж 21 марта.</strong></li>
-            <li><strong>Вторник и четверг, 12:00–13:30</strong> по GMT (14:00–15:30 по Москве).</li>
-            <li>Zoom, группа до 24 человек.</li>
-            <li>Одна встреча в неделю — теория и демо, вторая — практика в парах.</li>
-            <li>Задания и бонусные практики между встречами, чат для вопросов по IFS.</li>
-          </ul>
-          <div class="card card-maximum" style="margin-top: 1.5rem;">
-            <p><strong>Максимум пользы группа даёт, когда вы по-настоящему уделяете это время себе:</strong> приходите на встречи с камерой, присутствуете в процессе, участвуете в практике в парах и при пропуске нагоняете в течение недели. Лайфстайлом это становится, когда вы постепенно уделяете чуткое внимание себе: сначала на встречах группы, затем в жизни — из этого вырастает стабильный контакт с собой.</p>
-            <p>Полтора часа встречи — это время под практику и контакт с собой. В таком формате проще замечать части и входить с ними в контакт. Если сейчас сложно выделить такое окно в расписании — можно присоединиться в одном из следующих потоков.</p>
-          </div>
-          <p class="price-main" style="margin-top: 1.75rem;">Участие в группе — 300 €.</p>
-          <p class="price-note">Оплата возможна в евро или в рублях.</p>
-          <p style="margin-top: 1.75rem;">
-            <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="teacher">
-      <div class="container">
-        <div>
-          <p class="section-heading-note">Ведёт группу Алёна Павленко</p>
-          <h2>Мой путь и опыт</h2>
-
-          <p class="about-block-label">Карьера</p>
-          <div class="about-block">
-            <p>Первая карьера — экспериментальный физик, PhD: аспирантура в Германии, постдоки в США и Великобритании, затем стратегический консалтинг (Deloitte) в Голландии. Мне всегда было интересно исследовать <strong>сложные системы</strong> и находить решения, которые работают — от научных задач до организационных и человеческих.</p>
-          </div>
-
-          <p class="about-block-label">Путь к практике</p>
-          <div class="about-block">
-            <p>К профессии помогающего практика я пришла через многолетнюю личную работу с собой: много лет личной терапии, более <strong>350&nbsp;часов веду телесную практику</strong> (баня, массаж, работа с телом и состоянием), затем <strong>IFS</strong>. Ни в телесной работе, ни в IFS я не ставила целью стать практиком — я использовала эти инструменты, чтобы заботиться о своём состоянии. То, что реально помогало мне самой, я естественным образом осваивала глубоко, и со временем ко мне стали обращаться. Так было с телесными практиками, и так стало с IFS. Этот метод дал мне <strong>колоссальный результат</strong> и внедрился в мою жизнь, значимо повысив уровень удовлетворённости жизнью.</p>
-          </div>
-
-          <p class="about-block-label">Обучение IFS</p>
-          <div class="about-block">
-            <p>С IFS я познакомилась через <strong><a href="https://www.healingandawakening.institute/about" target="_blank" rel="noopener noreferrer">Гэтри Сайена</a></strong> — ученика Ричарда Шварца и одного из ведущих преподавателей <strong>Evolving IFS</strong>, подхода с особым фокусом на состоянии и Self. У него более <strong>15 лет преподавания</strong> и более <strong>10&nbsp;000 часов</strong> работы с клиентами. <strong>Два года я училась у него</strong> в разных форматах, а также прошла курс Ричарда Шварца IFS and Spirituality — всё это дало ощущение глубины, бережности и ясной структуры метода.</p>
-          </div>
-
-          <p class="about-block-label">Сейчас</p>
-          <div class="about-block">
-            <p>Академия и консалтинг дали мне <strong>системное мышление и структуру</strong>, телесная практика — умение слышать состояние и присутствовать вниманием в теле. Сейчас я в команде IFS Academy (More Self) как <strong>эксперт и лид-куратор</strong>: помогаю выстраивать образовательные материалы и процессы так, чтобы в них сочетались работа с состоянием и интеграция знаний, фасилитирую групповые пространства и практики для студентов, провожу воркшопы и открытые вебинары вместе с Гэтри, сопровождаю практику студентов. Параллельно я веду <strong><a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener noreferrer">индивидуальную работу по IFS</a></strong> и продолжаю телесную практику.</p>
-          </div>
-
-          <p class="about-block-label">Что меня вдохновляет</p>
-          <div class="about-block">
-            <p>Меня вдохновляет делиться опытом, который реально работает: помогать людям выстраивать контакт со своей системой и становиться в этом самостоятельными. Важен <strong>навык, который остаётся с вами</strong> и поддерживает в обычной, неидеальной жизни.</p>
-          </div>
-        </div>
-        <div>
-          <div class="teacher-photo">
-            <img src="images/photo_2026-03-03_09-41-252.jpg" alt="Алёна Павленко и Гэтри Сайен">
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="waitlist">
-      <div class="container">
-        <div>
-          <p class="section-heading-note">Следующий шаг</p>
-          <h2>Запись в вейтлист</h2>
-          <p>Старт группы — 5 апреля. Старт продаж — 21 марта. Чат откроется за неделю до старта. Чтобы попасть в вейтлист, заполните форму по ссылке ниже.</p>
-          <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" target="_blank" rel="noopener noreferrer" class="btn btn-cta">Записаться в вейтлист</a>
-          <p style="margin-top: 1.25rem;">Если у вас есть вопросы про группу, можно <a href="https://t.me/Alena_Pavlenko_PhD">написать мне в Telegram</a>.</p>
-          <a href="https://t.me/Alena_Pavlenko_PhD" class="btn btn-secondary" style="margin-top:0.75rem;">Написать в Telegram</a>
-          <div class="card card-individual">
-            <p><strong>Если вам ближе индивидуальный формат</strong> или хотите работать в этом методе параллельно с группой — я веду индивидуальную работу в подходе IFS, запись на встречу-знакомство и форматы: <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener noreferrer">на моём сайте</a>.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>Части целого · Алёна Павленко · <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener noreferrer">Индивидуальная работа в подходе IFS</a></p>
+      <h1 class="animate-in delay-2">Части целого</h1>
+      <p class="hero-pain animate-in delay-3">Практическая группа для тех, кому надоело, что саморазвитие стало второй работой, а в голове по‑прежнему неспокойно.</p>
+      <p class="hero-copy animate-in delay-3">Эта практическая группа заточена под одно: чтобы навык прорастал в жизнь сам, а вам оставалось только наблюдать и пробовать.</p>
+      <p class="hero-copy animate-in delay-4">IFS — простой и органичный метод взаимодействия с собой. Его внедрение происходит естественно, по мере знакомства с методом.</p>
+      <p class="hero-copy animate-in delay-4">Практика здесь — как спа для психики: расслабление и путь к себе.</p>
+      <p class="hero-accent animate-in delay-5">Ты уже целое. Эта группа помогает это ощутить на практике.</p>
     </div>
-  </footer>
+    <div class="hero-right">
+      <svg class="hero-illustration animate-in delay-2" viewBox="0 0 220 220" fill="none">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(232,232,88,0.6)"/>
+            <stop offset="40%" stop-color="rgba(232,232,88,0.15)"/>
+            <stop offset="100%" stop-color="rgba(232,232,88,0)"/>
+          </radialGradient>
+        </defs>
+        <!-- Inner glow — Self energy -->
+        <circle class="ill-center" cx="110" cy="110" r="50" fill="url(#glow)"/>
+        <!-- Many diverse parts forming a whole -->
+        <circle cx="110" cy="52" r="18" fill="rgba(126,184,181,0.3)" stroke="rgba(126,184,181,0.55)" stroke-width="0.8"/>
+        <circle cx="155" cy="72" r="14" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+        <circle cx="168" cy="110" r="16" fill="rgba(232,232,88,0.2)" stroke="rgba(232,232,88,0.4)" stroke-width="0.8"/>
+        <circle cx="152" cy="150" r="13" fill="rgba(126,184,181,0.25)" stroke="rgba(126,184,181,0.5)" stroke-width="0.8"/>
+        <circle cx="110" cy="168" r="17" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>
+        <circle cx="68" cy="150" r="15" fill="rgba(232,232,88,0.2)" stroke="rgba(232,232,88,0.4)" stroke-width="0.8"/>
+        <circle cx="52" cy="110" r="14" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+        <circle cx="65" cy="72" r="16" fill="rgba(232,232,88,0.15)" stroke="rgba(232,232,88,0.35)" stroke-width="0.8"/>
+        <!-- Smaller fragments between -->
+        <circle cx="135" cy="58" r="8" fill="rgba(126,184,181,0.2)" stroke="rgba(126,184,181,0.4)" stroke-width="0.5"/>
+        <circle cx="166" cy="132" r="9" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+        <circle cx="132" cy="165" r="7" fill="rgba(232,232,88,0.18)" stroke="rgba(232,232,88,0.35)" stroke-width="0.5"/>
+        <circle cx="85" cy="166" r="10" fill="rgba(126,184,181,0.2)" stroke="rgba(126,184,181,0.4)" stroke-width="0.5"/>
+        <circle cx="54" cy="135" r="8" fill="rgba(232,232,88,0.15)" stroke="rgba(232,232,88,0.3)" stroke-width="0.5"/>
+        <circle cx="55" cy="85" r="9" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+        <circle cx="85" cy="55" r="7" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="0.5"/>
+        <!-- Outer ring — wholeness -->
+        <circle cx="110" cy="110" r="88" fill="none" stroke="rgba(126,184,181,0.2)" stroke-width="0.8" stroke-dasharray="4 6"/>
+      </svg>
+      <div class="hero-card animate-in delay-3">
+        <p class="hero-card-label">6 недель · 12 встреч · онлайн</p>
+        <div class="hero-card-details">
+          <span class="hero-card-detail">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            до 24 человек
+          </span>
+          <span class="hero-card-detail">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            2 встречи в неделю
+          </span>
+          <span class="hero-card-detail">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Zoom
+          </span>
+        </div>
+        <p class="hero-card-price">300 €</p>
+        <p class="hero-card-price-note">за весь курс</p>
+        <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться в вейтлист</a>
+        <a href="#section-4" class="cta-secondary">Подробнее о программе</a>
+        <div class="hero-card-author">
+          Ведёт <strong>Алёна Павленко</strong><br>
+          Эксперт и куратор IFS Academy, PhD,<br>350+ часов телесной практики
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ABOUT — bigger photo
+     ═══════════════════════════════════════════ -->
+<section id="section-1" class="section about-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <div class="about-top animate-in delay-1">
+      <div class="about-top-left">
+        <img src="https://pavlenkophysics.github.io/ifs-for-life/images/DSCF3599-cropped.jpg" alt="Алёна Павленко" class="author-photo">
+        <p class="section-subtitle">Привет, я Алёна</p>
+      </div>
+      <div class="about-top-right">
+        <p>До IFS я была в терапии уже несколько лет, пробовала разные методы и практики. Много понимала головой, но в повседневную жизнь это ложилось со скрипом — и внутри появлялся новый критик: «Мы же уже понимаем этот паттерн, почему мы снова здесь?»</p>
+        <p><strong>IFS оказал колоссальное влияние</strong> на уровень удовлетворённости жизнью: стало меньше внутреннего напряжения и больше пространства реализовывать свой потенциал, <strong>вместо траты сил на борьбу с собой</strong>.</p>
+      </div>
+    </div>
+    <div class="about-accent animate-in delay-2">
+      IFS зацепил меня тем, что здесь у каждой части есть благое намерение, и тем, как через любопытство и практику он естественно встроился в жизнь.
+    </div>
+    <p class="about-closing animate-in delay-3">Из собственной практики, двух лет работы с IFS и участия в IFS Academy (More Self) как эксперта и куратора выросло желание делиться этим шире. IFS естественно встраивается в жизнь и меняет её качество — и я рада давать эту возможность большему количеству людей.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     AUDIENCE — fixed icons
+     ═══════════════════════════════════════════ -->
+<section id="section-2" class="section audience-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <h2 class="animate-in delay-1">Для кого эта группа</h2>
+    <div class="audience-grid">
+      <div class="glass-card audience-card animate-in delay-2">
+        <div class="audience-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <p>Замечаете внутреннего критика, перфекциониста, достигатора или часть, которая устала всё вывозить — и хочется спокойнее внутри.</p>
+      </div>
+      <div class="glass-card audience-card animate-in delay-3">
+        <div class="audience-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <p>Любите понимать, как всё устроено в мыслях и внутри, и ищете формат, который переводит понимание в действия.</p>
+      </div>
+      <div class="glass-card audience-card animate-in delay-4">
+        <div class="audience-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        </div>
+        <p>Читаете книги и посты про IFS, слушаете лекции или подкасты — модель откликается, и хочется попробовать на себе.</p>
+      </div>
+      <div class="glass-card audience-card animate-in delay-5">
+        <div class="audience-icon">
+          <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <p>Чувствуете, что прежние курсы и проработки отнимали столько сил, что стали второй работой — и хотите иначе.</p>
+      </div>
+    </div>
+    <p class="audience-note animate-in delay-6">*Это практическая группа «для себя»: она является обучением методу для личного использования, а для профессиональной работы потребуется дополнительная подготовка.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     IFS EXPLAINED
+     ═══════════════════════════════════════════ -->
+<section id="section-3" class="section ifs-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <h2 class="animate-in delay-1">Classic и Evolving IFS простыми словами</h2>
+    <div class="ifs-cards">
+      <div class="glass-card ifs-card animate-in delay-2">
+        <h3>IFS (Internal Family Systems)</h3>
+        <p>На установки, реакции и мысли смотрят как на <strong>части</strong> одной системы. У каждой части свои задачи и благое намерение, даже если способ порой мешает всей системе. В центре модели — состояние <strong>Self</strong>: из него ты знакомишься с частями с любопытством и уважением и выстраиваешь с ними отношения.</p>
+        <p style="margin-top: 12px;">Описание модели есть в книгах и постах — попробуй и посмотри, как откликнется лично у тебя.</p>
+      </div>
+      <div class="glass-card ifs-card ifs-evolving animate-in delay-3">
+        <h3>Evolving IFS</h3>
+        <p>Это развитие классического IFS с фокусом на <strong>состоянии</strong>. Специальное внимание уделяют тому, в каком состоянии вы в контакте с собой и с частью, что происходит с телом, насколько безопасно и достаточно ли поддержки в моменте.</p>
+        <p style="margin-top: 12px;">Важно и то, что вы делаете, и то, <strong>в каком состоянии это происходит</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PROGRAM — as toggle
+     ═══════════════════════════════════════════ -->
+<section id="section-4" class="section program-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <h2 class="animate-in delay-1">Программа</h2>
+    <div class="toggle-section animate-in delay-2">
+      <button class="toggle-trigger" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
+        6 недель: от знакомства с частями до интеграции
+        <span class="toggle-arrow">&#9660;</span>
+      </button>
+      <div class="toggle-content">
+        <div class="toggle-inner">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="glass-card timeline-card">
+                <div class="week-label">Неделя 1</div>
+                <h3>Карта IFS: части, Self, система</h3>
+                <p>Что такое IFS: части, система, Self. Какие бывают части, зачем они вообще появляются, и как смотреть на это из любопытства и присутствия.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="glass-card timeline-card">
+                <div class="week-label">Неделя 2</div>
+                <h3>Self и состояние</h3>
+                <p>Как вы узнаёте своё Self-состояние, чем оно отличается от «идеальной версии себя» и от частей. Разбираем, зачем в Evolving IFS столько внимания состоянию, телу и ощущению безопасности.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="glass-card timeline-card">
+                <div class="week-label">Неделя 3</div>
+                <h3>Знакомство с частями: первые шаги диалога и 6F</h3>
+                <p>Как замечать свои части в моменте и вступать с ними в контакт. Разбираем базовый протокол 6F: по шагам знакомимся с частью и узнаём, что для неё важно.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="glass-card timeline-card">
+                <div class="week-label">Неделя 4</div>
+                <h3>Изгнанники: кто они и как с ними быть</h3>
+                <p>Кто такие изгнанники в IFS, как понять, что сейчас поднимается именно изгнанник. Говорим о том, как быть с этим бережно: на что опираться и когда лучше привлекать терапевта.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="glass-card timeline-card">
+                <div class="week-label">Неделя 5</div>
+                <h3>Отношения через призму частей</h3>
+                <p>Внутренние и внешние отношения: критик, достигатор, перфекционист, близкие, семья, работа. Смотрим, как наши части встречаются с частями других людей и что помогает выстраивать более гармоничные отношения.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="glass-card timeline-card">
+                <div class="week-label">Неделя 6</div>
+                <h3>Интеграция и свои IFS-инструменты на дальше</h3>
+                <p>Собираем воедино всё, что случилось за эти недели. Формируем ваш личный набор опор, инструментов и практик, с которыми вы пойдёте дальше — чтобы IFS оставался в повседневности.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="animate-in delay-3" style="text-align:center; margin-top:36px;">
+      <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться в вейтлист</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS — business as toggle
+     ═══════════════════════════════════════════ -->
+<section id="section-5" class="section testimonials-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <h2 class="animate-in delay-1">Как меняется жизнь, когда появляется язык частей</h2>
+
+    <div class="testimonial-group animate-in delay-2">
+      <div class="testimonial-group-title">Личные отношения и ощущение себя</div>
+      <div class="testimonial-cards">
+        <div class="glass-card testimonial-card">
+          <p>Для меня это как будто новый уровень осознанности, новый слой открывается. Когда в моменте осознаешь часть, которая тебя захватывает, ты можешь с ней разъединиться, и тогда появляется больше ясности.</p>
+        </div>
+        <div class="glass-card testimonial-card">
+          <p>Стало меньше реактивной реакции. Вместо того чтобы действовать как хочет протектор, я замедляюсь, даю ему пространство внутри позлиться, и только потом начинаю что-то делать. В итоге вместо большой ссоры с мужем на неделю получился настоящий диалог.</p>
+        </div>
+        <div class="glass-card testimonial-card">
+          <p>Больше появилось сострадания к своим частям, соответственно, и к другим людям тоже. Это меняет отношения с близкими.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="toggle-section animate-in delay-3">
+      <button class="toggle-trigger" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
+        Бизнес и работа
+        <span class="toggle-arrow">&#9660;</span>
+      </button>
+      <div class="toggle-content">
+        <div class="toggle-inner">
+          <div class="testimonial-cards">
+            <div class="glass-card testimonial-card">
+              <p>В диалоге с деловыми партнёрами я объясняю через части, почему я хочу чего-то конкретным образом. Это помогает снизить напряжённость, особенно когда у тебя есть часть-перфекционист, которой надо, чтобы всё было идеально.</p>
+            </div>
+            <div class="glass-card testimonial-card">
+              <p>В бизнесе, когда ты с партнёром можешь говорить на этом языке, можно избегать очень многих конфликтов.</p>
+            </div>
+            <div class="glass-card testimonial-card">
+              <p>С коллегами в рабочей коммуникации общение через контекст частей сильно снижает градус обсуждения — появляется понимание, что в разговоре реагирует конкретная часть, и это делает разговор более экологичным.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FORMAT & PRICING — clean cards
+     ═══════════════════════════════════════════ -->
+<section id="section-6" class="section pricing-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <h2 class="animate-in delay-1">Формат и стоимость</h2>
+
+    <div class="format-grid animate-in delay-2">
+      <div class="format-item">
+        <div class="format-value">до 24 человек</div>
+        <div class="format-label">Zoom · онлайн</div>
+      </div>
+      <div class="format-item">
+        <div class="format-value">6 недель</div>
+        <div class="format-label">12 встреч по 1,5 часа</div>
+      </div>
+      <div class="format-item">
+        <div class="format-value">Вт и Чт</div>
+        <div class="format-label">12:00–13:30 GMT<br>(14:00–15:30 Мск)</div>
+      </div>
+    </div>
+
+    <div class="format-details-row animate-in delay-3">
+      <div class="format-detail-card">
+        <h4>Структура встреч</h4>
+        <p>Одна встреча в неделю — теория и демо, вторая — практика в парах. Между встречами — задания и бонусные практики, чат для вопросов по IFS.</p>
+      </div>
+      <div class="format-detail-card">
+        <h4>Старт</h4>
+        <p>Старт группы — 5 апреля. Старт продаж — 21 марта. Чат откроется за неделю до старта.</p>
+      </div>
+    </div>
+
+    <div class="format-essence animate-in delay-4">
+      <p>Группа работает в полную силу, когда вы уделяете это время себе: приходите с камерой, участвуете в практике и при пропуске нагоняете в течение недели. Полтора часа встречи — это время под контакт с собой. Из регулярного чуткого внимания к себе вырастает стабильный контакт с собой в повседневности. Если сейчас сложно выделить это окно — можно присоединиться в одном из следующих потоков.</p>
+    </div>
+
+    <div class="price-block animate-in delay-5">
+      <div class="price-amount">300 €</div>
+      <p class="price-note">Оплата возможна в евро или в рублях.</p>
+    </div>
+
+    <div class="animate-in delay-5">
+      <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться в вейтлист</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BIO — new heading
+     ═══════════════════════════════════════════ -->
+<section id="section-7" class="section bio-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <p class="section-subtitle animate-in delay-1">Об авторе</p>
+    <h2 class="animate-in delay-1">Алёна Павленко</h2>
+    <div class="bio-blocks">
+      <div class="glass-card bio-block animate-in delay-2">
+        <div class="bio-label">Карьера</div>
+        <p>Первая карьера — экспериментальный физик, PhD: аспирантура в Германии, постдоки в США и Великобритании, затем стратегический консалтинг (Deloitte) в Голландии. Мне всегда было интересно исследовать сложные системы и находить решения, которые работают — от научных задач до организационных и человеческих.</p>
+      </div>
+      <div class="glass-card bio-block animate-in delay-3">
+        <div class="bio-label">Путь к практике</div>
+        <p>К профессии помогающего практика я пришла через многолетнюю личную работу с собой: много лет личной терапии, более 350 часов веду телесную практику (баня, массаж, работа с телом и состоянием), затем IFS.</p>
+        <p>То, что реально помогало мне самой, я естественным образом осваивала глубоко, и со временем ко мне стали обращаться. Этот метод дал мне <strong>колоссальный результат</strong> и внедрился в мою жизнь, значимо повысив уровень удовлетворённости жизнью.</p>
+      </div>
+      <div class="glass-card bio-block animate-in delay-4">
+        <div class="bio-label">Обучение IFS</div>
+        <p>С IFS я познакомилась через <a href="https://www.healingandawakening.institute/about" target="_blank" rel="noopener">Гэтри Сайена</a> — ученика Ричарда Шварца и одного из ведущих преподавателей Evolving IFS, подхода с особым фокусом на состоянии и Self. У него более <strong>15 лет</strong> преподавания и более <strong>10 000 часов</strong> работы с клиентами.</p>
+        <p><strong>Два года</strong> я училась у него в разных форматах, а также прошла курс Ричарда Шварца IFS and Spirituality — всё это дало ощущение глубины, бережности и ясной структуры метода.</p>
+      </div>
+
+      <div class="bio-photo animate-in delay-4">
+        <img src="https://pavlenkophysics.github.io/ifs-for-life/images/photo_2026-03-03_09-41-252.jpg" alt="Алёна Павленко и Гэтри Сайен">
+      </div>
+
+      <div class="glass-card bio-block animate-in delay-5">
+        <div class="bio-label">Сейчас</div>
+        <p>Академия и консалтинг дали мне <strong>системное мышление и структуру</strong>, телесная практика — умение слышать состояние и присутствовать вниманием в теле. Сейчас я в команде IFS Academy (More Self) как эксперт и лид-куратор: помогаю выстраивать образовательные материалы, фасилитирую групповые пространства и практики для студентов, провожу воркшопы и открытые вебинары вместе с Гэтри.</p>
+        <p>Параллельно я веду <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener">индивидуальную работу по IFS</a> и продолжаю телесную практику.</p>
+      </div>
+      <div class="glass-card bio-block animate-in delay-6">
+        <div class="bio-label">Что меня вдохновляет</div>
+        <p>Меня вдохновляет делиться опытом, который реально работает: помогать людям выстраивать контакт со своей системой и становиться в этом самостоятельными. Важен <strong>навык, который остаётся с вами</strong> и поддерживает в обычной, неидеальной жизни.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════ -->
+<section id="section-8" class="section cta-section">
+  <div class="section-inner">
+    <div class="section-divider animate-in"></div>
+    <p class="section-subtitle animate-in delay-1">Следующий шаг</p>
+    <h2 class="animate-in delay-1">Запись в вейтлист</h2>
+    <p class="cta-details animate-in delay-2">
+      Старт группы — 5 апреля. Старт продаж — 21 марта.<br>
+      Чат откроется за неделю до старта. Чтобы попасть в вейтлист, заполните форму по ссылке ниже.
+    </p>
+    <div class="animate-in delay-3">
+      <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться в вейтлист</a>
+    </div>
+    <div class="cta-links animate-in delay-4">
+      <p>Если у вас есть вопросы про группу, можно <a href="https://t.me/pavlenkophysics" target="_blank" rel="noopener">написать мне в Telegram</a>.</p>
+    </div>
+    <div class="cta-alt-card animate-in delay-5">
+      <p><strong>Если вам ближе индивидуальный формат</strong> или хотите работать в этом методе параллельно с группой — я веду индивидуальную работу в подходе IFS, запись на встречу-знакомство и форматы: <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener">на моём сайте</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <p>Части целого · Алёна Павленко</p>
+  <div class="footer-links">
+    <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener">Индивидуальная работа в подходе IFS</a>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════ -->
+<script>
+/* ── Particle System ── */
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouseX = -1000, mouseY = -1000;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.opacity = Math.random() * 0.3 + 0.1;
+    this.type = Math.random() > 0.5 ? 'circle' : 'diamond';
+    this.angle = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.02;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.angle += this.rotSpeed;
+    const dx = this.x - mouseX;
+    const dy = this.y - mouseY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 120) { this.x += dx / dist * 0.8; this.y += dy / dist * 0.8; }
+    if (this.x < -20 || this.x > canvas.width + 20 || this.y < -20 || this.y > canvas.height + 20) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    if (this.type === 'circle') {
+      ctx.beginPath();
+      ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = '#7eb8b5';
+      ctx.fill();
+    } else {
+      ctx.beginPath();
+      ctx.moveTo(0, -this.size);
+      ctx.lineTo(this.size, 0);
+      ctx.lineTo(0, this.size);
+      ctx.lineTo(-this.size, 0);
+      ctx.closePath();
+      ctx.fillStyle = '#b8d4d0';
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+}
+
+const particleCount = Math.min(80, Math.floor(window.innerWidth * window.innerHeight / 15000));
+for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 140) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(126, 184, 181, ${0.06 * (1 - dist / 140)})`;
+        ctx.lineWidth = 0.5;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animateCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawConnections();
+  requestAnimationFrame(animateCanvas);
+}
+animateCanvas();
+
+/* ── Scroll Animations ── */
+const animElements = document.querySelectorAll('.animate-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+animElements.forEach(el => observer.observe(el));
+
+/* ── Navigation Dots ── */
+const sections = document.querySelectorAll('.section');
+const navContainer = document.querySelector('.nav-dots');
+sections.forEach((sec, idx) => {
+  const dot = document.createElement('button');
+  dot.classList.add('nav-dot');
+  dot.setAttribute('aria-label', 'Секция ' + (idx + 1));
+  dot.addEventListener('click', () => { sec.scrollIntoView({ behavior: 'smooth' }); });
+  navContainer.appendChild(dot);
+});
+const allDots = navContainer.querySelectorAll('.nav-dot');
+const dotObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = parseInt(entry.target.id.replace('section-', ''), 10);
+      allDots.forEach(d => d.classList.remove('active'));
+      if (allDots[idx]) allDots[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+sections.forEach(sec => dotObserver.observe(sec));
+</script>
 </body>
 </html>
