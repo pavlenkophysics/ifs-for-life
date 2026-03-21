@@ -582,11 +582,12 @@ strong { color: var(--text); }
   margin-top: 36px;
 }
 
-.audience-card {
+.glass-card.audience-card {
   text-align: left;
   padding: 22px 28px;
-  display: flex;
-  gap: 18px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
   align-items: center;
   background: rgba(13, 92, 99, 0.06);
   backdrop-filter: none;
@@ -597,6 +598,14 @@ strong { color: var(--text); }
   margin-bottom: 12px;
   transition: background 0.3s ease, border-color 0.3s ease;
   overflow: visible;
+}
+
+.audience-card h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px;
 }
 
 .audience-card::after { display: none; }
@@ -630,10 +639,11 @@ strong { color: var(--text); }
 }
 
 .audience-card:hover .audience-icon svg {
-  stroke: var(--accent-2);
+  stroke: var(--bg-dark);
+  stroke-width: 2;
 }
 
-.audience-card p { font-size: 0.98rem; line-height: 1.65; color: var(--text); }
+.audience-card p { font-size: 0.95rem; line-height: 1.55; color: var(--muted); margin: 0; }
 
 .audience-note {
   font-size: 0.85rem;
@@ -798,7 +808,7 @@ strong { color: var(--text); }
 .testimonial-cards {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 
 .testimonial-card {
@@ -820,9 +830,48 @@ strong { color: var(--text); }
 
 .testimonial-card p {
   font-family: var(--sans);
-  font-size: 1.02rem;
-  line-height: 1.75;
+  font-size: 0.92rem;
+  line-height: 1.65;
   color: var(--text);
+}
+
+/* ── Testimonial Tabs ── */
+.testimonial-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.testimonial-tab {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 20px;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.testimonial-tab:hover {
+  border-color: var(--accent-soft);
+  color: var(--accent);
+}
+
+.testimonial-tab.active {
+  background: var(--accent);
+  color: var(--text-inverse);
+  border-color: var(--accent);
+}
+
+.testimonial-panel {
+  display: none;
+}
+
+.testimonial-panel.active {
+  display: block;
 }
 
 /* ═══════════════════════════════════════════
@@ -832,33 +881,52 @@ strong { color: var(--text); }
 
 .format-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 28px;
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card-bg);
 }
 
 .format-item {
-  background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--card-border);
-  border-top: 3px solid var(--accent-2);
-  border-radius: 16px;
-  padding: 24px 20px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.format-item:nth-child(odd) {
+  border-right: 1px solid var(--card-border);
+}
+
+.format-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.format-item svg {
+  width: 20px; height: 20px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
 }
 
 .format-item .format-value {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 600;
   color: var(--bg-dark);
-  margin-bottom: 6px;
+  line-height: 1.3;
 }
 
-.format-item .format-label {
-  font-size: 0.82rem;
-  color: var(--accent);
-  line-height: 1.4;
+.format-item-start {
+  grid-column: 1 / -1;
+  justify-content: center;
+  border-right: none !important;
 }
 
 .format-details-row {
@@ -900,6 +968,14 @@ strong { color: var(--text); }
   text-align: left;
 }
 
+.format-essence-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
 .format-essence p { font-size: 0.95rem; line-height: 1.7; }
 
 .price-block { margin: 36px 0; }
@@ -925,23 +1001,45 @@ strong { color: var(--text); }
 .bio-blocks {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
   margin-top: 32px;
+  text-align: left;
 }
 
 .bio-block { text-align: left; }
 
 .bio-label {
   font-family: var(--sans);
-  font-size: 0.75rem; font-weight: 600;
+  font-size: 0.78rem; font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.08em;
   color: var(--accent);
-  margin-bottom: 10px;
+  margin: 1.25rem 0 0.5rem;
 }
+.bio-label:first-child { margin-top: 0; }
 
 .bio-block p { font-size: 0.95rem; margin-bottom: 12px; }
 .bio-block p:last-child { margin-bottom: 0; }
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 0;
+  align-items: center;
+}
+.cert-card {
+  background: rgba(255,255,255,0.6);
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.cert-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
 
 .bio-photo {
   width: 100%; max-width: 500px;
@@ -991,16 +1089,48 @@ strong { color: var(--text); }
 .site-footer {
   position: relative; z-index: 2;
   text-align: center;
-  padding: 40px 24px;
+  padding: 48px 24px 36px;
   font-size: 0.85rem;
-  color: var(--accent);
+  color: var(--muted);
+  border-top: 1px solid var(--card-border);
 }
+.site-footer p { margin: 0 0 16px; }
 
 .footer-links {
   display: flex;
-  gap: 20px;
+  gap: 12px;
   justify-content: center;
-  margin-top: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: rgba(13, 92, 99, 0.04);
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.footer-links a:hover {
+  background: rgba(13, 92, 99, 0.1);
+  border-color: var(--accent-soft);
+}
+.footer-links a svg {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--muted);
+  opacity: 0.7;
 }
 
 /* ═══════════════════════════════════════════
@@ -1010,7 +1140,9 @@ strong { color: var(--text); }
   .section { padding: 80px 18px; min-height: auto; }
   .glass-card { padding: 24px 20px; border-radius: 16px; }
   .format-grid { grid-template-columns: 1fr; }
+  .format-item:nth-child(odd) { border-right: none; }
   .format-details-row { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
   .hero-section { padding: 40px 18px; }
   .hero-section .section-inner { grid-template-columns: 1fr; gap: 32px; }
   .hero-left .hero-pain { font-size: 1.15rem; }
@@ -1083,6 +1215,46 @@ strong { color: var(--text); }
 .how-card p { font-size: 0.95rem; margin-bottom: 10px; }
 .how-card p:last-child { margin-bottom: 0; }
 
+.meeting-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.meeting-steps li {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  margin-bottom: 0.65rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.meeting-steps li:last-child { margin-bottom: 0; }
+.step-num {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.how-card:nth-child(1) .step-num {
+  background: var(--accent);
+  color: #fff;
+}
+.how-card:nth-child(2) .step-num {
+  background: var(--accent-2-hover);
+  color: #fff;
+}
+.how-card:nth-child(3) .step-num {
+  background: var(--accent-soft);
+  color: #fff;
+}
+
 .how-summary {
   margin-top: 28px;
   padding: 28px;
@@ -1093,6 +1265,67 @@ strong { color: var(--text); }
   text-align: left;
 }
 .how-summary p { font-size: 0.95rem; line-height: 1.7; }
+
+.skill-formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0 0 1rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: 50px;
+  background: rgba(13, 92, 99, 0.05);
+  border: 1px solid var(--card-border);
+}
+.skill-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--accent);
+  border: 1px solid var(--card-border);
+}
+.skill-pill svg {
+  width: 0.95rem; height: 0.95rem;
+  color: var(--accent);
+}
+.skill-plus {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-soft);
+}
+.skill-equals {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.skill-result {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.skill-result svg {
+  width: 1rem; height: 1rem;
+  color: var(--accent-2);
+}
+.skill-note {
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-top: 0;
+  line-height: 1.55;
+}
 
 /* ═══════════════════════════════════════════
    FAQ ACCORDION
@@ -1212,10 +1445,9 @@ strong { color: var(--text); }
         <span class="hero-badge">Практическая группа по IFS</span>
       </div>
       <h1 class="animate-in delay-2">Части целого</h1>
-      <p class="hero-pain animate-in delay-3">Практическая группа для тех, кому надоело, что саморазвитие стало второй работой, а в голове по‑прежнему неспокойно.</p>
-      <p class="hero-copy animate-in delay-3">Эта практическая группа заточена под одно: чтобы навык не висел задачей «внедрить», а сам прорастал в жизнь.</p>
-      <p class="hero-copy animate-in delay-4">IFS — простой и органичный метод взаимодействия с собой. Его интеграция происходит естественно, по мере знакомства с методом.</p>
-      <p class="hero-copy animate-in delay-4">Практика здесь — как спа для психики: расслабление и путь к себе.</p>
+      <p class="hero-pain animate-in delay-3">Практическая группа для тех, кому саморазвитие стало второй работой — а напряжение внутри никуда не делось.</p>
+      <p class="hero-copy animate-in delay-3">IFS — простой и органичный метод работы со своими паттернами. Эта практическая группа устроена так, чтобы IFS естественно интегрировался в твою жизнь, снижая внутреннее напряжение и освобождая энергию для реализации твоего потенциала.</p>
+      <p class="hero-copy animate-in delay-4">Практика здесь — как спа для психики: расслабление и пространство для себя.</p>
       <p class="hero-accent animate-in delay-5">Ты уже целое. Эта группа помогает это ощутить на практике.</p>
     </div>
     <div class="hero-right">
@@ -1291,12 +1523,9 @@ strong { color: var(--text); }
           <p class="section-subtitle">Привет, я Алёна</p>
         </div>
         <div>
-          <p>Больше 10 лет я пробовала разные методы и практики — много понимала головой, но в повседневную жизнь это ложилось со скрипом. <strong>IFS оказал колоссальное влияние</strong> на уровень удовлетворённости жизнью: стало меньше внутреннего напряжения и больше пространства реализовывать свой потенциал.</p>
-          <p>IFS зацепил меня тем, что у каждой части есть благое намерение, и тем, как через любопытство и практику он естественно встроился в жизнь.</p>
+          <p>Когда-то я поняла, как сильно <strong>бессознательные паттерны влияют на жизнь</strong>, и начала искать как с ними работать. <strong>Больше 10 лет</strong> я пробовала разное: терапия, ретриты, книги по психологии — знаний становилось больше, а в жизнь внедрялись лишь крупицы.</p>
+          <p>IFS зацепил меня идеей, что у каждого паттерна есть благое намерение. А потом незаметно произошло главное: внутренние зажимы стали <strong>расслабляться быстрее</strong>, а отношения с собой и с близкими — <strong>разворачиваться свободнее</strong>. Сейчас я вижу такие же трансформации у тех, кому помогаю интегрировать IFS в индивидуальной работе. Это и вдохновило меня создать эту практическую группу.</p>
         </div>
-      </div>
-      <div class="about-card-accent">
-        Из собственной практики, двух лет работы с IFS и участия в <a href="https://alumni.ifscourse.com/" target="_blank" rel="noopener">IFS Academy (More Self)</a> как эксперта и куратора выросло желание делиться этим шире. IFS естественно встраивается в жизнь и меняет её качество — и я рада давать эту возможность большему количеству людей.
       </div>
     </div>
   </div>
@@ -1313,27 +1542,39 @@ strong { color: var(--text); }
     <div class="audience-grid">
       <div class="glass-card audience-card animate-in delay-2">
         <div class="audience-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"/><path d="M12 8v4l3 3"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
         </div>
-        <p>Постоянно анализируете себя, но ничего не меняется. Понимание есть, а внутри по-прежнему тесно — критик, перфекционист и достигатор никуда не делись.</p>
+        <div>
+          <h3>Знания накапливаются, а напряжение остаётся</h3>
+          <p>Ты много знаешь про себя и свои паттерны, но это скорее перегружает и превращается в зацикливание, повышая внутреннее напряжение.</p>
+        </div>
       </div>
       <div class="glass-card audience-card animate-in delay-3">
         <div class="audience-icon">
-          <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <p>Саморазвитие стало второй работой: курсы, книги, терапия — а ощущение «надо ещё поработать над собой» только растёт. Хочется способ, который снимает напряжение и встраивается в жизнь сам.</p>
+        <div>
+          <h3>Паттерны знакомы, но продолжают управлять</h3>
+          <p>Ты замечаешь внутреннего критика, перфекциониста и другие части, и хочешь находить с ними общий язык.</p>
+        </div>
       </div>
       <div class="glass-card audience-card animate-in delay-4">
         <div class="audience-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <p>Читаете про IFS, слушаете подкасты — модель откликается, но между «знать» и «уметь применять к себе» пропасть. Хочется попробовать на практике в безопасном пространстве.</p>
+        <div>
+          <h3>В сложных разговорах теряется опора</h3>
+          <p>В сложных разговорах по работе или в личных отношениях ты иногда теряешь опору и хочешь научиться сохранять контакт с собой даже в интенсивные моменты.</p>
+        </div>
       </div>
       <div class="glass-card audience-card animate-in delay-5">
         <div class="audience-icon">
           <svg viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
         </div>
-        <p>Хотите научиться быть с собой в сложные моменты — через контакт и присутствие. И чтобы этот навык остался с вами надолго.</p>
+        <div>
+          <h3>IFS откликается, хочется глубже</h3>
+          <p>Тебе откликается IFS как модель, и хочется узнать больше и применять её в своей повседневной жизни.</p>
+        </div>
       </div>
     </div>
     <p class="audience-note animate-in delay-6">*Это практическая группа для личного навыка. Она не готовит к роли терапевта или помогающего практика.</p>
@@ -1351,14 +1592,13 @@ strong { color: var(--text); }
     <div class="ifs-cards">
       <div class="glass-card ifs-card animate-in delay-2">
         <h3>Classic IFS</h3>
-        <p>В IFS (Internal Family Systems) паттерны, установки, внутренние голоса рассматриваются как части — с ними можно выстраивать отношения. У каждой части благое намерение, каждая по-своему защищает.</p>
-        <p style="margin-top: 12px;">В центре метода — <strong>Self</strong>: состояние присутствия и принятия, из которого возможен контакт с частями. Метод даёт снять внутреннее напряжение и выстроить навык: замечать части, выстраивать с ними отношения, двигаться к большей целостности.</p>
-        <p style="margin-top: 12px;">Исследования показывают эффективность в работе с депрессией, тревогой, устойчивостью и самоотношением.</p>
+        <p>В IFS (Internal Family Systems) паттерны, установки, внутренние голоса рассматриваются как части — у каждой благое намерение, с каждой можно выстроить отношения. В центре метода — <strong>Self</strong>: состояние присутствия и принятия, из которого возможен контакт с частями.</p>
+        <p style="margin-top: 12px;">Эффективность IFS подтверждена множеством научных исследований — в работе с тревогой, депрессией и самоотношением.</p>
       </div>
       <div class="glass-card ifs-card ifs-evolving animate-in delay-3">
         <h3>Evolving IFS</h3>
-        <p>Это развитие классического IFS, где ключевое — <strong>расширение контакта с Self</strong>. Чем устойчивее ваше присутствие в Self, тем глубже и бережнее контакт частей с Self — и тем больше пространства для изменений.</p>
-        <p style="margin-top: 12px;">В Evolving IFS много внимания тому, что происходит с телом, насколько есть ощущение безопасности и поддержки. Умение замечать своё состояние и возвращаться в Self — <strong>один из главных навыков</strong>, который вы получаете в этой группе.</p>
+        <p>Это развитие классического IFS с фокусом на <strong>расширении контакта с Self</strong>. Чем устойчивее это присутствие, тем глубже и бережнее взаимодействие частей — и тем больше пространства для изменений.</p>
+        <p style="margin-top: 12px;">Умение замечать своё состояние и возвращаться в Self — <strong>один из главных навыков</strong> этой группы.</p>
       </div>
     </div>
   </div>
@@ -1380,7 +1620,7 @@ strong { color: var(--text); }
           <div class="glass-card timeline-card">
             <div class="week-label">Неделя 1</div>
             <h3>Карта IFS: части, Self, система</h3>
-            <p>Что такое IFS: части, система, Self. Какие бывают части, зачем они вообще появляются, и как смотреть на это из любопытства и присутствия.</p>
+            <p>Какие бывают части, зачем они появляются и как смотреть на это из любопытства и присутствия.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -1388,7 +1628,7 @@ strong { color: var(--text); }
           <div class="glass-card timeline-card">
             <div class="week-label">Неделя 2</div>
             <h3>Self и состояние</h3>
-            <p>Как вы узнаёте своё Self-состояние, чем оно отличается от «идеальной версии себя» и от частей. Разбираем, зачем в Evolving IFS столько внимания состоянию, телу и ощущению безопасности.</p>
+            <p>Self-состояние, чем оно отличается от «идеальной версии себя» и от частей.</p>
           </div>
         </div>
         <div class="timeline-item">
@@ -1396,43 +1636,31 @@ strong { color: var(--text); }
           <div class="glass-card timeline-card">
             <div class="week-label">Неделя 3</div>
             <h3>Знакомство с частями: первые шаги диалога и 6F</h3>
-            <p>Как замечать свои части в моменте и вступать с ними в контакт. Разбираем базовый протокол 6F: по шагам знакомимся с частью и узнаём, что для неё важно.</p>
+            <p>Как замечать свои части в моменте и вступать с ними в контакт. Базовый протокол 6F: знакомимся с частью по шагам и узнаём, что для неё важно.</p>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="toggle-section animate-in delay-3">
-      <button class="toggle-trigger" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
-        Недели 4–6: углубление и интеграция
-        <span class="toggle-arrow">&#9660;</span>
-      </button>
-      <div class="toggle-content">
-        <div class="toggle-inner">
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="glass-card timeline-card">
-                <div class="week-label">Неделя 4</div>
-                <h3>Изгнанники: кто они и как с ними быть</h3>
-                <p>Кто такие изгнанники в IFS, как понять, что сейчас поднимается именно изгнанник. Говорим о том, как быть с этим бережно: на что опираться и когда лучше привлекать терапевта.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="glass-card timeline-card">
-                <div class="week-label">Неделя 5</div>
-                <h3>Отношения через призму частей</h3>
-                <p>Внутренние и внешние отношения: критик, достигатор, перфекционист, близкие, семья, работа. Смотрим, как наши части встречаются с частями других людей и что помогает выстраивать более гармоничные отношения.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="glass-card timeline-card">
-                <div class="week-label">Неделя 6</div>
-                <h3>Интеграция и свои IFS-инструменты на дальше</h3>
-                <p>Собираем воедино всё, что случилось за эти недели. Формируем ваш личный набор опор, инструментов и практик, с которыми вы пойдёте дальше — чтобы IFS оставался в повседневности.</p>
-              </div>
-            </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="glass-card timeline-card">
+            <div class="week-label">Неделя 4</div>
+            <h3>Изгнанники: кто они и как с ними быть</h3>
+            <p>Как понять, что мы в контакте с изгнанником, как быть с этим бережно и когда лучше привлекать терапевта.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="glass-card timeline-card">
+            <div class="week-label">Неделя 5</div>
+            <h3>Отношения через призму частей</h3>
+            <p>Как наши части встречаются с частями других людей — в близких отношениях, семье, работе — и что помогает выстраивать более гармоничные отношения.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="glass-card timeline-card">
+            <div class="week-label">Неделя 6</div>
+            <h3>Интеграция и свои IFS-инструменты на будущее</h3>
+            <p>Собираем воедино всё, что случилось за эти недели. Личный набор опор, инструментов и практик — чтобы IFS продолжал интегрироваться в жизнь.</p>
           </div>
         </div>
       </div>
@@ -1451,40 +1679,38 @@ strong { color: var(--text); }
   <div class="section-inner">
     <div class="section-icon animate-in"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
     <div class="section-divider animate-in"></div>
-    <h2 class="animate-in delay-1">Как меняется жизнь, когда появляется язык частей</h2>
+    <h2 class="animate-in delay-1">Как меняется жизнь, когда IFS становится частью жизни</h2>
 
-    <div class="testimonial-group animate-in delay-2">
-      <div class="testimonial-group-title">Личные отношения и ощущение себя</div>
-      <div class="testimonial-cards">
-        <div class="glass-card testimonial-card">
-          <p>Для меня это как будто новый уровень осознанности, новый слой открывается. Когда в моменте осознаешь часть, которая тебя захватывает, ты можешь с ней разъединиться, и тогда появляется больше ясности.</p>
-        </div>
-        <div class="glass-card testimonial-card">
-          <p>Стало меньше реактивной реакции. Вместо того чтобы действовать как хочет протектор, я замедляюсь, даю ему пространство внутри позлиться, и только потом начинаю что-то делать. В итоге вместо большой ссоры с мужем на неделю получился настоящий диалог.</p>
-        </div>
-        <div class="glass-card testimonial-card">
-          <p>Больше появилось сострадания к своим частям, соответственно, и к другим людям тоже. Это меняет отношения с близкими.</p>
+    <div class="animate-in delay-2">
+      <div class="testimonial-tabs">
+        <button class="testimonial-tab active" onclick="switchTab(this, 'tab-personal')">Личное</button>
+        <button class="testimonial-tab" onclick="switchTab(this, 'tab-work')">Работа</button>
+      </div>
+
+      <div id="tab-personal" class="testimonial-panel active">
+        <div class="testimonial-cards">
+          <div class="glass-card testimonial-card">
+            <p>Для меня это как будто <strong>новый уровень осознанности</strong>, новый слой открывается. Когда в моменте осознаешь часть, которая тебя захватывает, ты можешь с ней разъединиться, и тогда появляется больше ясности.</p>
+          </div>
+          <div class="glass-card testimonial-card">
+            <p>Стало меньше реактивной реакции. Вместо того чтобы действовать как хочет протектор, я замедляюсь, даю ему пространство внутри позлиться, и только потом начинаю что-то делать. В итоге <strong>вместо большой ссоры с мужем на неделю получился настоящий диалог</strong>.</p>
+          </div>
+          <div class="glass-card testimonial-card">
+            <p><strong>Больше сострадания к своим частям</strong>, соответственно, и к другим людям тоже. Это меняет отношения с близкими.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="toggle-section animate-in delay-3">
-      <button class="toggle-trigger" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
-        Бизнес и работа
-        <span class="toggle-arrow">&#9660;</span>
-      </button>
-      <div class="toggle-content">
-        <div class="toggle-inner">
-          <div class="testimonial-cards">
-            <div class="glass-card testimonial-card">
-              <p>В диалоге с деловыми партнёрами я объясняю через части, почему я хочу чего-то конкретным образом. Это помогает снизить напряжённость, особенно когда у тебя есть часть-перфекционист, которой надо, чтобы всё было идеально.</p>
-            </div>
-            <div class="glass-card testimonial-card">
-              <p>В бизнесе, когда ты с партнёром можешь говорить на этом языке, можно избегать очень многих конфликтов.</p>
-            </div>
-            <div class="glass-card testimonial-card">
-              <p>С коллегами в рабочей коммуникации общение через контекст частей сильно снижает градус обсуждения — появляется понимание, что в разговоре реагирует конкретная часть, и это делает разговор более экологичным.</p>
-            </div>
+      <div id="tab-work" class="testimonial-panel">
+        <div class="testimonial-cards">
+          <div class="glass-card testimonial-card">
+            <p>В диалоге с деловыми партнёрами я объясняю через части, почему я хочу чего-то конкретным образом. Это помогает <strong>снизить напряжённость</strong>, особенно когда у тебя есть часть-перфекционист, которой надо, чтобы всё было идеально.</p>
+          </div>
+          <div class="glass-card testimonial-card">
+            <p>В бизнесе, когда ты с партнёром можешь говорить на этом языке, <strong>можно избегать очень многих конфликтов</strong>.</p>
+          </div>
+          <div class="glass-card testimonial-card">
+            <p>С коллегами в рабочей коммуникации общение через контекст частей сильно <strong>снижает градус обсуждения</strong> — появляется понимание, что в разговоре реагирует конкретная часть, и это делает разговор более экологичным.</p>
           </div>
         </div>
       </div>
@@ -1500,7 +1726,7 @@ strong { color: var(--text); }
     <div class="section-icon animate-in"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
     <div class="section-divider animate-in"></div>
     <h2 class="animate-in delay-1">Как устроены занятия</h2>
-    <p class="animate-in delay-1" style="font-size: 0.95rem; color: var(--muted); margin-top: -4px;">Каждая неделя — это три элемента, из которых складывается навык</p>
+    <p class="animate-in delay-1" style="font-size: 0.95rem; color: var(--muted); margin-top: -4px;">Четыре элемента, из которых метод интегрируется в жизнь</p>
 
     <div class="how-cards">
       <div class="glass-card how-card animate-in delay-2">
@@ -1508,34 +1734,75 @@ strong { color: var(--text); }
           <div class="how-card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
-          <h3>Теория + демо</h3>
+          <h3>Медитация, теория и демо</h3>
         </div>
-        <p>Каждая встреча начинается с <strong>медитации</strong> — это один из инструментов расширения контакта с Self. Затем — структурированная теория: что за концепция, как она работает в IFS, какой протокол стоит за ней.</p>
-        <p>После теории — <strong>живое демо</strong>: один из участников становится клиентом и проживает глубокий контакт со своей системой. Остальные наблюдают процесс изнутри — и видят, как протокол работает вживую.</p>
+        <ul class="meeting-steps">
+          <li>
+            <span class="step-num">1</span>
+            <span><strong>Расширение контакта с Self</strong> — медитация, которая помогает замечать своё состояние и возвращаться в присутствие.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span><strong>Знания</strong> — как устроены части, как работает Self, какие протоколы помогают выстраивать с ними контакт.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span><strong>Живое демо</strong> — один из участников получает индивидуальную сессию IFS и проживает глубокий контакт со своей системой. Остальные видят, как протокол применяется вживую.</span>
+          </li>
+        </ul>
       </div>
       <div class="glass-card how-card animate-in delay-3">
         <div class="how-card-header">
           <div class="how-card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2-hover)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h3>Практика в парах</h3>
+          <h3>Медитация и практика в парах</h3>
         </div>
-        <p>Вторая встреча недели — практика. Вы работаете в паре, поочерёдно в двух ролях: <strong>клиент</strong> (чувствуете, как части поднимаются, учитесь быть с ними) и <strong>практик</strong> (ведёте процесс по протоколу, учитесь замечать и сопровождать).</p>
-        <p>Зачем обе роли? В IFS как навыке жизни вам нужны оба взгляда: изнутри — чтобы узнавать свои части, и снаружи — чтобы понимать, как с ними быть.</p>
-      </div>
-      <div class="glass-card how-card animate-in delay-4">
-        <div class="how-card-header">
-          <div class="how-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-soft)"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-          </div>
-          <h3>Рефлексия</h3>
-        </div>
-        <p>После каждой практики — разбор: что произошло, что получилось, что было сложно. Это <strong>когнитивная интеграция</strong> — момент, когда опыт превращается в понимание и закрепляется как навык.</p>
+        <ul class="meeting-steps">
+          <li>
+            <span class="step-num">1</span>
+            <span><strong>Расширение контакта с Self</strong> — медитация для настройки на работу с частями.</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <span><strong>Проживание</strong> — в роли клиента проживаешь процесс и глубже понимаешь свои собственные части.</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <span><strong>Ведение</strong> — в роли практика ведёшь процесс по протоколу и учишься быть с частями из состояния Self.</span>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="how-summary animate-in delay-5">
-      <p><strong>Теория даёт знание. Практика даёт опыт. Рефлексия даёт навык.</strong> Из этих трёх элементов метод встраивается естественно — как способ быть с собой. А умение замечать своё состояние и возвращаться в контакт с Self — навык, который остаётся с вами после группы.</p>
+      <div class="skill-formula">
+        <div class="skill-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          Self
+        </div>
+        <span class="skill-plus">+</span>
+        <div class="skill-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Знания
+        </div>
+        <span class="skill-plus">+</span>
+        <div class="skill-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Проживание
+        </div>
+        <span class="skill-plus">+</span>
+        <div class="skill-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Ведение
+        </div>
+        <span class="skill-equals">=</span>
+        <div class="skill-result">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Интеграция
+        </div>
+      </div>
+      <p class="skill-note">Когда практикуешь IFS для себя, ты одновременно и проживаешь, и ведёшь процесс — и всё это из состояния Self. Поэтому на группе важно побыть в каждой из этих ролей — именно так метод становится частью жизни.</p>
     </div>
   </div>
 </section>
@@ -1550,33 +1817,32 @@ strong { color: var(--text); }
     <h2 class="animate-in delay-1">Формат и стоимость</h2>
 
     <div class="format-grid animate-in delay-2">
-      <div class="format-item">
-        <div class="format-value">до 24 человек</div>
-        <div class="format-label">Zoom · онлайн</div>
+      <div class="format-item format-item-start">
+        <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>
+        <span class="format-value">Старт 28 апреля</span>
       </div>
       <div class="format-item">
-        <div class="format-value">6 недель</div>
-        <div class="format-label">12 встреч по 1,5 часа</div>
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="format-value">до 24 человек</span>
       </div>
       <div class="format-item">
-        <div class="format-value">Вт и Чт</div>
-        <div class="format-label">12:00–13:30 GMT<br>(14:00–15:30 Мск)</div>
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="format-value">6 недель · 12 встреч по 1,5 ч</span>
+      </div>
+      <div class="format-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="format-value">Вт и Чт · 14:00–15:30 Мск</span>
+      </div>
+      <div class="format-item">
+        <svg viewBox="0 0 24 24"><path d="M15 10l5 5-5 5"/><path d="M4 4v7a4 4 0 0 0 4 4h12"/></svg>
+        <span class="format-value">Zoom · чат в Telegram</span>
       </div>
     </div>
 
-    <div class="format-details-row animate-in delay-3">
-      <div class="format-detail-card">
-        <h4>Структура встреч</h4>
-        <p>Одна встреча в неделю — теория и демо, вторая — практика в парах. Между встречами — задания и бонусные практики, чат для вопросов по IFS.</p>
-      </div>
-      <div class="format-detail-card">
-        <h4>Старт</h4>
-        <p>Старт группы — 28 апреля. Старт продаж — 7 апреля. Чат откроется за неделю до старта.</p>
-      </div>
-    </div>
-
-    <div class="format-essence animate-in delay-4">
-      <p>Группа работает в полную силу, когда вы уделяете это время себе: приходите с камерой, участвуете в практике и при пропуске нагоняете в течение недели. Полтора часа встречи — это время под контакт с собой. Из регулярного чуткого внимания к себе вырастает стабильный контакт с собой в повседневности. Если сейчас сложно выделить это окно — можно присоединиться в одном из следующих потоков.</p>
+    <div class="format-essence animate-in delay-3">
+      <h3 class="format-essence-title">Как получить максимум от практической группы</h3>
+      <p>6 недель ритмичных встреч, на каждой из которых — полтора часа безраздельного внимания к себе. Важно быть с включённой камерой и присутствовать полностью. Потому что из регулярного и чуткого внимания к себе вырастает стабильный контакт с собой в повседневности.</p>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-top: 8px;">Если сейчас сложно выделить это окно — можно присоединиться в одном из следующих потоков.</p>
     </div>
 
     <div class="price-block animate-in delay-5">
@@ -1600,33 +1866,41 @@ strong { color: var(--text); }
     <p class="section-subtitle animate-in delay-1">Об авторе</p>
     <h2 class="animate-in delay-1">Алёна Павленко</h2>
     <div class="bio-blocks">
+      <div class="bio-label animate-in delay-2">Карьера</div>
       <div class="glass-card bio-block animate-in delay-2">
-        <div class="bio-label">Карьера</div>
-        <p>Первая карьера — экспериментальный физик, PhD: аспирантура в Германии, постдоки в США и Великобритании, затем стратегический консалтинг (Deloitte) в Голландии. Мне всегда было интересно исследовать сложные системы и находить решения, которые работают — от научных задач до организационных и человеческих.</p>
+        <p>По первой профессии я <strong>физик, PhD</strong>. Прошла аспирантуру в Германии, работала в США и Великобритании. Потом перешла в <strong>стратегический консалтинг (Deloitte)</strong> в Голландии. Мне всегда было интересно разбираться в сложных системах и искать решения, которые работают.</p>
       </div>
+
+      <div class="bio-label animate-in delay-3">Путь к практике</div>
       <div class="glass-card bio-block animate-in delay-3">
-        <div class="bio-label">Путь к практике</div>
-        <p>К профессии помогающего практика я пришла через многолетнюю личную работу с собой: много лет личной терапии, более 350 часов веду телесную практику (баня, массаж, работа с телом и состоянием), затем IFS.</p>
-        <p>То, что реально помогало мне самой, я естественным образом осваивала глубоко, и со временем ко мне стали обращаться. IFS дал мне <strong>колоссальный результат</strong> и внедрился в мою жизнь, значимо повысив уровень удовлетворённости жизнью.</p>
+        <p>Я не планировала становиться практиком. Сначала были годы своей терапии, а затем <strong>350+ часов телесной практики</strong> — баня, массаж, работа с телом и состоянием. Потом в моей жизни появился IFS — работа с частями и Self. Метод глубоко изменил мою жизнь и то, как я чувствую себя в ней. Со временем ко мне стали обращаться люди: сначала по телу и состоянию, а потом и по IFS.</p>
       </div>
+
+      <div class="bio-label animate-in delay-4">Обучение IFS</div>
       <div class="glass-card bio-block animate-in delay-4">
-        <div class="bio-label">Обучение IFS</div>
-        <p>С IFS я познакомилась через <a href="https://www.healingandawakening.institute/about" target="_blank" rel="noopener">Гэтри Сайена</a> — ученика Ричарда Шварца и одного из ведущих преподавателей Evolving IFS, подхода с особым фокусом на состоянии и Self. У него более <strong>15 лет</strong> преподавания и более <strong>10 000 часов</strong> работы с клиентами.</p>
-        <p><strong>Два года</strong> я училась у него в разных форматах, а также прошла курс Ричарда Шварца IFS and Spirituality — всё это дало ощущение глубины, бережности и ясной структуры метода.</p>
+        <p>IFS я узнала через <strong><a href="https://www.healingandawakening.institute/about" target="_blank" rel="noopener">Гэтри Сайена</a></strong> — он ученик Ричарда Шварца и один из ведущих преподавателей Evolving IFS, включая работу с состоянием и Self. У него больше <strong>15 лет</strong> преподавания и больше <strong>10 000 часов</strong> с клиентами. Я <strong>два года училась у него</strong>, а также прошла курс Ричарда Шварца IFS and Spirituality.</p>
       </div>
 
       <div class="bio-photo animate-in delay-4">
         <img src="https://pavlenkophysics.github.io/ifs-for-life/images/photo_2026-03-03_09-41-252.jpg" alt="Алёна Павленко и Гэтри Сайен">
       </div>
 
+      <div class="bio-label animate-in delay-5">Сейчас</div>
       <div class="glass-card bio-block animate-in delay-5">
-        <div class="bio-label">Сейчас</div>
-        <p>Академия и консалтинг дали мне <strong>системное мышление и структуру</strong>, телесная практика — умение слышать состояние и присутствовать вниманием в теле. Сейчас я в команде <a href="https://alumni.ifscourse.com/" target="_blank" rel="noopener">IFS Academy (More Self)</a> как эксперт и лид-куратор: помогаю выстраивать образовательные материалы, фасилитирую групповые пространства и практики для студентов, провожу воркшопы и открытые вебинары вместе с Гэтри.</p>
-        <p>Параллельно я веду <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener">индивидуальную работу по IFS</a> и продолжаю телесную практику.</p>
+        <p>Академия и консалтинг дали мне <strong>системное мышление</strong>, а телесная практика — <strong>умение слышать состояние и быть в теле</strong>. В <a href="https://alumni.ifscourse.com/" target="_blank" rel="noopener">IFS Academy</a> я эксперт и куратор: проектирую, как мы доносим материал до студентов и выстраиваем процесс интеграции знаний, фасилитирую практические сессии, провожу воркшопы и вебинары вместе с Гэтри.</p>
+        <p>Параллельно веду <a href="https://alena-pavlenko-ifs.netlify.app/" target="_blank" rel="noopener">индивидуальную работу по IFS</a> и продолжаю телесную практику.</p>
       </div>
-      <div class="glass-card bio-block animate-in delay-6">
-        <div class="bio-label">Что меня вдохновляет</div>
-        <p>Меня вдохновляет делиться опытом, который реально работает: помогать людям выстраивать контакт со своей системой и становиться в этом самостоятельными. Важен <strong>навык, который остаётся с вами</strong> и поддерживает в обычной, неидеальной жизни.</p>
+
+      <div class="bio-label animate-in delay-6">Сертификаты</div>
+      <div class="glass-card bio-block animate-in delay-6" style="padding: 20px;">
+        <div class="cert-grid">
+          <div class="cert-card">
+            <img src="images/cert-level1.png" alt="Сертификат — Level 1 IFS Coaching Course by Guthrie Sayen, 40 часов, апрель 2025">
+          </div>
+          <div class="cert-card">
+            <img src="images/cert-evolving-ifs.png" alt="Сертификат — Classic and Evolving IFS: More Self Module 1 by Guthrie Sayen, 34 часа, декабрь 2025">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1656,11 +1930,11 @@ strong { color: var(--text); }
       <div class="faq-item animate-in delay-2">
         <button class="faq-question" onclick="toggleFaq(this)">
           <svg class="faq-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span class="faq-question-text">Я не хочу рассказывать личное на 24 человека. Мне подойдёт?</span>
+          <span class="faq-question-text">Что если мне будет сложно делиться личным при группе?</span>
           <span class="faq-arrow">&#9660;</span>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">Практика в парах проходит один на один в отдельных комнатах Zoom. На общей группе вы делитесь ровно тем, чем комфортно.</div>
+          <div class="faq-answer-inner">Практика в парах проходит один на один в отдельных комнатах Zoom. В ходе демо у клиента всегда есть выбор, чем делиться — нет необходимости рассказывать больше, чем комфортно. Вы двигаетесь в своём темпе и сами выбираете глубину.</div>
         </div>
       </div>
 
@@ -1672,17 +1946,6 @@ strong { color: var(--text); }
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">Да, камера — это важная часть формата. Практика требует присутствия и внимания, а камера помогает удерживать фокус — и вам, и партнёру в паре. Это полтора часа встречи, которые вы выделяете полностью под контакт с собой.</div>
-        </div>
-      </div>
-
-      <div class="faq-item animate-in delay-3">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <svg class="faq-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span class="faq-question-text">Мне тревожно и страшно — это нормально?</span>
-          <span class="faq-arrow">&#9660;</span>
-        </button>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">Да, и это даже хороший знак — значит, есть часть, которая защищает вас. В IFS мы именно с такими частями и работаем. Группа построена так, чтобы вы могли двигаться в своём темпе. Вы двигаетесь в своём темпе и сами выбираете глубину.</div>
         </div>
       </div>
 
@@ -1710,8 +1973,8 @@ strong { color: var(--text); }
     <p class="section-subtitle animate-in delay-1">Следующий шаг</p>
     <h2 class="animate-in delay-1">Регистрация</h2>
     <p class="cta-details animate-in delay-2">
-      Старт группы — 28 апреля. Старт продаж — 7 апреля.<br>
-      Чат откроется за неделю до старта. Чтобы попасть в группу, заполните форму по ссылке ниже.
+      Старт группы — 28 апреля.<br>
+      Чтобы попасть в группу, заполните форму по ссылке ниже.
     </p>
     <div class="animate-in delay-3">
       <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться</a>
@@ -1720,7 +1983,7 @@ strong { color: var(--text); }
       <p>Если у вас есть вопросы про группу, можно <a href="https://t.me/pavlenkophysics" target="_blank" rel="noopener">написать мне в Telegram</a>.</p>
     </div>
     <div class="cta-alt-card animate-in delay-5">
-      <p><strong>Если вам ближе индивидуальный формат</strong> или хотите работать в этом методе параллельно с группой — я веду индивидуальную работу в подходе IFS, запись на встречу-знакомство и форматы: <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener">на моём сайте</a>.</p>
+      <p><strong>Если вам ближе индивидуальный формат</strong> или хотите работать в этом методе параллельно с группой — я веду индивидуальную работу в подходе IFS, запись на встречу-знакомство и форматы: <a href="https://alena-pavlenko-ifs.netlify.app/" target="_blank" rel="noopener">на моём сайте</a>.</p>
     </div>
     <svg class="hero-illustration animate-in delay-5" viewBox="0 0 220 220" fill="none" style="max-width: 200px; margin: 40px auto 0;">
       <defs>
@@ -1753,10 +2016,25 @@ strong { color: var(--text); }
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer class="site-footer">
-  <p>Части целого · Алёна Павленко</p>
   <div class="footer-links">
-    <a href="https://pavlenkophysics.github.io/alena-pavlenko-ifs/" target="_blank" rel="noopener">Индивидуальная работа в подходе IFS</a>
+    <a href="https://t.me/Alena_Pavlenko_IFS" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Написать в Telegram
+    </a>
+    <a href="https://t.me/Alena_Pavlenko_IFS" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      Канал в Telegram
+    </a>
+    <a href="https://www.instagram.com/alena_pavlenko_ifs" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+    <a href="https://alena-pavlenko-ifs.netlify.app/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Индивидуальная работа
+    </a>
   </div>
+  <p class="footer-copy">Части целого · Алёна Павленко</p>
 </footer>
 
 <!-- ═══════════════════════════════════════════
@@ -1883,6 +2161,13 @@ const dotObserver = new IntersectionObserver((entries) => {
 sections.forEach(sec => dotObserver.observe(sec));
 
 /* ── FAQ Accordion ── */
+function switchTab(btn, panelId) {
+  btn.closest('.testimonial-tabs').querySelectorAll('.testimonial-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.animate-in, .section-inner').querySelectorAll('.testimonial-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+}
+
 function toggleFaq(btn) {
   const answer = btn.nextElementSibling;
   btn.classList.toggle('open');
