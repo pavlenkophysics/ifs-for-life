@@ -510,105 +510,6 @@ strong { color: var(--text); }
 .hero-card-author strong { color: rgba(255, 255, 255, 0.85); }
 
 /* ═══════════════════════════════════════════
-   WEBINAR BANNER
-   ═══════════════════════════════════════════ */
-.webinar-banner { padding-top: 0; padding-bottom: 0; }
-.webinar-card {
-  background: linear-gradient(135deg, rgba(13,92,99,.06), rgba(232,232,88,.08));
-  border: 1px solid var(--card-border);
-  border-radius: 24px;
-  padding: 48px 44px;
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
-}
-.webinar-tag {
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--accent-soft);
-  margin-bottom: 16px;
-}
-.webinar-title {
-  font-family: var(--serif);
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  font-weight: 600;
-  color: var(--bg-dark);
-  margin-bottom: 16px;
-}
-.webinar-title em {
-  font-style: italic;
-  color: var(--gold);
-}
-.webinar-desc {
-  font-size: .95rem;
-  color: var(--muted);
-  max-width: 520px;
-  margin: 0 auto 24px;
-  line-height: 1.7;
-}
-.webinar-meta {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  font-size: .88rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 28px;
-}
-.webinar-meta span {
-  padding: 6px 14px;
-  background: rgba(255,255,255,.7);
-  border-radius: 999px;
-  border: 1px solid rgba(126,184,181,.2);
-}
-
-/* ═══════════════════════════════════════════
-   REGISTRATION FORM
-   ═══════════════════════════════════════════ */
-.reg-form {
-  max-width: 440px;
-  margin: 0 auto;
-  text-align: left;
-  display: grid;
-  gap: 20px;
-}
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.form-field label {
-  font-size: .85rem;
-  font-weight: 500;
-  color: var(--bg-dark);
-}
-.form-field input,
-.form-field textarea {
-  padding: 14px 18px;
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  font-family: var(--sans);
-  font-size: 1rem;
-  color: var(--text);
-  background: var(--card-bg);
-  outline: none;
-  transition: border-color .2s;
-  resize: vertical;
-}
-.form-field input:focus,
-.form-field textarea:focus {
-  border-color: var(--accent-soft);
-  box-shadow: 0 0 0 3px rgba(126, 184, 181, 0.15);
-}
-.form-field input::placeholder,
-.form-field textarea::placeholder {
-  color: rgba(22, 36, 34, 0.35);
-}
-
-/* ═══════════════════════════════════════════
    ABOUT (Привет, я Алёна)
    ═══════════════════════════════════════════ */
 .about-section .section-inner { text-align: center; max-width: 900px; }
@@ -1584,6 +1485,10 @@ strong { color: var(--text); }
         <p class="hero-card-label">Старт 28 апреля · 6 недель · 12 встреч · онлайн</p>
         <div class="hero-card-details">
           <span class="hero-card-detail">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            до 24 человек
+          </span>
+          <span class="hero-card-detail">
             <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             2 встречи в неделю
           </span>
@@ -1594,32 +1499,13 @@ strong { color: var(--text); }
         </div>
         <p class="hero-card-price">350 €</p>
         <p class="hero-card-price-note">за весь курс</p>
-        <a href="#section-10" class="cta-gold">Записаться</a>
+        <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться</a>
         <a href="#section-4" class="cta-secondary">Подробнее о программе</a>
         <div class="hero-card-author">
           Ведёт <strong>Алёна Павленко</strong><br>
           Эксперт и куратор IFS Academy, PhD,<br>350+ часов телесной практики
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     WEBINAR BANNER
-     ═══════════════════════════════════════════ -->
-<section class="section webinar-banner">
-  <div class="section-inner">
-    <div class="webinar-card animate-in delay-1">
-      <div class="webinar-tag">Открытый вебинар</div>
-      <h2 class="webinar-title">IFS для жизни: как <em>договариваться</em> со своими паттернами</h2>
-      <p class="webinar-desc">Разберём на практике, как работает метод IFS и почему он помогает там, где знания о себе уже есть, а напряжение внутри никуда не делось.</p>
-      <div class="webinar-meta">
-        <span>8 апреля</span>
-        <span>10:00 GMT / 13:00 МСК</span>
-        <span>Zoom · бесплатно</span>
-      </div>
-      <a href="webinar.html" class="cta-gold">Подробнее и регистрация</a>
     </div>
   </div>
 </section>
@@ -1781,7 +1667,7 @@ strong { color: var(--text); }
     </div>
     <div class="animate-in delay-3" style="text-align:center; margin-top:36px;">
       <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 16px;">Старт группы — 28 апреля</p>
-      <a href="#section-10" class="cta-gold">Записаться</a>
+      <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться</a>
     </div>
   </div>
 </section>
@@ -1936,6 +1822,10 @@ strong { color: var(--text); }
         <span class="format-value">Старт 28 апреля</span>
       </div>
       <div class="format-item">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="format-value">до 24 человек</span>
+      </div>
+      <div class="format-item">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         <span class="format-value">6 недель · 12 встреч по 1,5 ч</span>
       </div>
@@ -1961,7 +1851,7 @@ strong { color: var(--text); }
     </div>
 
     <div class="animate-in delay-5">
-      <a href="#section-10" class="cta-gold">Записаться</a>
+      <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться</a>
     </div>
   </div>
 </section>
@@ -2083,28 +1973,12 @@ strong { color: var(--text); }
     <p class="section-subtitle animate-in delay-1">Следующий шаг</p>
     <h2 class="animate-in delay-1">Регистрация</h2>
     <p class="cta-details animate-in delay-2">
-      Старт группы — 28 апреля. Заполните форму ниже, и я свяжусь с вами.
+      Старт группы — 28 апреля.<br>
+      Чтобы попасть в группу, заполните форму по ссылке ниже.
     </p>
-    <form name="group-registration" method="POST" data-netlify="true" class="reg-form animate-in delay-3">
-      <input type="hidden" name="form-name" value="group-registration">
-      <div class="form-field">
-        <label for="reg-name">Имя</label>
-        <input type="text" id="reg-name" name="name" required placeholder="Как вас зовут">
-      </div>
-      <div class="form-field">
-        <label for="reg-email">Email</label>
-        <input type="email" id="reg-email" name="email" required placeholder="Для связи">
-      </div>
-      <div class="form-field">
-        <label for="reg-tg">Telegram</label>
-        <input type="text" id="reg-tg" name="telegram" placeholder="@username">
-      </div>
-      <div class="form-field">
-        <label for="reg-note">Что привело или чего хочется от группы <span style="font-weight:400;color:var(--accent-soft)">(по желанию)</span></label>
-        <textarea id="reg-note" name="note" rows="3" placeholder="Можно коротко, можно подробно — как удобно"></textarea>
-      </div>
-      <button type="submit" class="cta-gold" style="width:100%;border:none;cursor:pointer;font-family:var(--sans)">Записаться</button>
-    </form>
+    <div class="animate-in delay-3">
+      <a href="https://forms.gle/BSX5QKxt8k3XXk3P8" class="cta-gold" target="_blank" rel="noopener">Записаться</a>
+    </div>
     <div class="cta-links animate-in delay-4">
       <p>Если у вас есть вопросы про группу, можно <a href="https://t.me/pavlenkophysics" target="_blank" rel="noopener">написать мне в Telegram</a>.</p>
     </div>

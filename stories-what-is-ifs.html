@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Stories — Что такое IFS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5faf8;
+  }
+
+  .story {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    margin: 0 auto 40px;
+  }
+
+  /* ── Slide 1: Cover ── */
+  .slide-1 {
+    background: linear-gradient(160deg, #0a4a50 0%, #0d5c63 40%, #1a6b6b 70%, #2a7a6a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 100px;
+  }
+
+  .slide-1 .leaf {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.06;
+  }
+  .slide-1 .leaf-1 { width: 600px; height: 600px; background: #e8a545; top: -200px; right: -200px; }
+  .slide-1 .leaf-2 { width: 400px; height: 400px; background: #d4956b; bottom: -100px; left: -150px; }
+  .slide-1 .leaf-3 { width: 300px; height: 300px; background: #8fbc8f; top: 50%; left: -100px; }
+
+  .slide-1 h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
+  }
+  .slide-1 h1 span {
+    display: block;
+    font-size: 52px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 24px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .slide-1 .subtitle {
+    font-size: 36px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+    max-width: 750px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .slide-1 .accent-line {
+    width: 80px;
+    height: 4px;
+    background: #e8a545;
+    border-radius: 2px;
+    margin: 48px auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Slide 2: What is IFS ── */
+  .slide-2 {
+    background: #f5faf8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 100px;
+  }
+
+  .slide-2 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    color: #0d5c63;
+    margin-bottom: 64px;
+    line-height: 1.2;
+  }
+
+  .ifs-card {
+    background: #fff;
+    border-radius: 32px;
+    padding: 64px;
+    margin-bottom: 40px;
+    border: 2px solid rgba(13, 92, 99, 0.1);
+  }
+
+  .ifs-card p {
+    font-size: 38px;
+    line-height: 1.65;
+    color: #2a3a3a;
+  }
+
+  .ifs-card strong { color: #0d5c63; }
+
+  .ifs-card .highlight {
+    display: inline;
+    background: linear-gradient(transparent 60%, rgba(232, 165, 69, 0.2) 60%);
+  }
+
+  /* ── Slide 3: Parts ── */
+  .slide-3 {
+    background: linear-gradient(160deg, #0d5c63 0%, #1a6b6b 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 100px;
+  }
+
+  .slide-3 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    color: #fff;
+    margin-bottom: 64px;
+    line-height: 1.2;
+  }
+
+  .part-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .part-icon {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+  }
+
+  .part-icon.orange { background: rgba(232, 165, 69, 0.2); }
+  .part-icon.green { background: rgba(143, 188, 143, 0.2); }
+  .part-icon.brown { background: rgba(212, 149, 107, 0.2); }
+
+  .part-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: #e8a545;
+    margin-bottom: 16px;
+  }
+
+  .part-text p {
+    font-size: 34px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── Slide 4: Evolving IFS ── */
+  .slide-4 {
+    background: #f5faf8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 100px;
+  }
+
+  .slide-4 .label {
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #0d5c63;
+    opacity: 0.6;
+    margin-bottom: 32px;
+    font-weight: 600;
+  }
+
+  .slide-4 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    color: #0d5c63;
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .evolving-block {
+    background: #fff;
+    border-radius: 32px;
+    padding: 56px;
+    margin-bottom: 36px;
+    border-left: 6px solid #e8a545;
+  }
+
+  .evolving-block p {
+    font-size: 36px;
+    line-height: 1.6;
+    color: #2a3a3a;
+  }
+
+  .evolving-block strong { color: #0d5c63; }
+
+  .slide-4 .note {
+    font-size: 32px;
+    line-height: 1.6;
+    color: #5a7a7a;
+    margin-top: 32px;
+    padding: 0 16px;
+  }
+
+  /* ── Slide 5: My story + why ── */
+  .slide-5 {
+    background: linear-gradient(160deg, #0a4a50 0%, #0d5c63 50%, #1a6b6b 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 100px;
+    position: relative;
+  }
+
+  .slide-5 .glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(232, 165, 69, 0.05);
+    bottom: -150px;
+    right: -150px;
+  }
+
+  .slide-5 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    color: #e8a545;
+    margin-bottom: 56px;
+    line-height: 1.2;
+  }
+
+  .my-story p {
+    font-size: 36px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 40px;
+  }
+
+  .my-story strong { color: #fff; }
+
+  .my-story .accent {
+    color: #e8a545;
+  }
+
+  /* ── Slide 6: Quote ── */
+  .slide-6 {
+    background: linear-gradient(160deg, #d4956b 0%, #c98555 50%, #b8754a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 100px;
+    position: relative;
+  }
+
+  .slide-6 .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    margin-bottom: -40px;
+  }
+
+  .slide-6 blockquote {
+    font-size: 42px;
+    line-height: 1.6;
+    color: #fff;
+    font-style: italic;
+    max-width: 800px;
+    margin-bottom: 48px;
+  }
+
+  .slide-6 blockquote strong {
+    font-style: normal;
+    color: #fff;
+  }
+
+  .slide-6 .source {
+    font-size: 28px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+  }
+
+  /* ── Slide 7: Quote 2 ── */
+  .slide-7 {
+    background: linear-gradient(160deg, #8fbc8f 0%, #6fa06f 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 100px;
+  }
+
+  .slide-7 .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    margin-bottom: -40px;
+  }
+
+  .slide-7 blockquote {
+    font-size: 42px;
+    line-height: 1.6;
+    color: #fff;
+    font-style: italic;
+    max-width: 800px;
+    margin-bottom: 48px;
+  }
+
+  .slide-7 .source {
+    font-size: 28px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+  }
+
+  /* ── Slide 8: Closing ── */
+  .slide-8 {
+    background: linear-gradient(160deg, #0a4a50 0%, #0d5c63 40%, #1a6b6b 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 100px;
+  }
+
+  .slide-8 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    color: #fff;
+    margin-bottom: 56px;
+    line-height: 1.3;
+  }
+
+  .slide-8 .links {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 24px;
+  }
+
+  .slide-8 .link-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    padding: 24px 48px;
+    font-size: 32px;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .slide-8 .link-pill .icon {
+    font-size: 28px;
+  }
+
+  .slide-8 .cta-text {
+    font-size: 34px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 56px;
+    line-height: 1.6;
+  }
+
+  /* ── Print helper ── */
+  @media print {
+    .story { page-break-after: always; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════ SLIDE 1: Cover ════ -->
+<div class="story slide-1">
+  <div class="leaf leaf-1"></div>
+  <div class="leaf leaf-2"></div>
+  <div class="leaf leaf-3"></div>
+  <h1>
+    <span>Что такое</span>
+    IFS
+  </h1>
+  <div class="accent-line"></div>
+  <p class="subtitle">Метод, который изменил моё отношение к себе и к жизни</p>
+</div>
+
+<!-- ════ SLIDE 2: What is IFS ════ -->
+<div class="story slide-2">
+  <h2>IFS — Internal Family Systems</h2>
+  <div class="ifs-card">
+    <p>Это метод, в основе которого простая идея: внутри нас живут <strong>разные части</strong> — со своими чувствами, убеждениями и намерениями.</p>
+  </div>
+  <div class="ifs-card">
+    <p>Внутренний критик, перфекционист, тревожная часть — всё это <span class="highlight">не враги и не поломки</span>. У каждой части есть <strong>благое намерение</strong> — она пытается нас защитить.</p>
+  </div>
+  <div class="ifs-card">
+    <p>А ещё в каждом из нас есть <strong>Self</strong> — спокойное, ясное состояние, из которого можно выстраивать контакт со своими частями.</p>
+  </div>
+</div>
+
+<!-- ════ SLIDE 3: Parts explained ════ -->
+<div class="story slide-3">
+  <h2>Какие бывают части</h2>
+  <div class="part-item">
+    <div class="part-icon orange">🛡</div>
+    <div class="part-text">
+      <h3>Защитники</h3>
+      <p>Критик, контролёр, перфекционист — они стараются уберечь от боли. Иногда их способы устарели, но намерение всегда доброе.</p>
+    </div>
+  </div>
+  <div class="part-item">
+    <div class="part-icon brown">💛</div>
+    <div class="part-text">
+      <h3>Уязвимые части</h3>
+      <p>Те, кого защитники оберегают. Они несут старую боль, стыд, одиночество. Именно к ним мы бережно обращаемся в IFS.</p>
+    </div>
+  </div>
+  <div class="part-item">
+    <div class="part-icon green">☀️</div>
+    <div class="part-text">
+      <h3>Self</h3>
+      <p>Это не часть, а состояние — спокойствие, ясность, сострадание. Из Self можно быть с любой частью, не сливаясь с ней.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SLIDE 4: Evolving IFS ════ -->
+<div class="story slide-4">
+  <div class="label">Направление, в котором я работаю</div>
+  <h2>Evolving IFS</h2>
+  <div class="evolving-block">
+    <p>Классический IFS работает с частями через <strong>диалог</strong>. Evolving IFS добавляет к этому <strong>работу с состоянием и телом</strong> — расширение контакта с Self через медитативные практики.</p>
+  </div>
+  <div class="evolving-block">
+    <p>Это значит, что мы не только разговариваем с частями, но и <strong>учимся чувствовать</strong> — где в теле живёт напряжение, как ощущается Self, как меняется состояние, когда часть расслабляется.</p>
+  </div>
+  <p class="note">Я училась у Гэтри Сайена — ученика Ричарда Шварца и одного из ведущих преподавателей Evolving IFS.</p>
+</div>
+
+<!-- ════ SLIDE 5: My story ════ -->
+<div class="story slide-5">
+  <div class="glow"></div>
+  <h2>Почему IFS стал для меня таким важным</h2>
+  <div class="my-story">
+    <p>Когда-то я поняла, как сильно <strong>бессознательные паттерны влияют на жизнь</strong>, и начала искать, как с ними работать.</p>
+    <p>Больше 10 лет я пробовала разное: терапия, ретриты, книги по психологии — знаний становилось больше, а в жизнь <span class="accent">внедрялись лишь крупицы</span>.</p>
+    <p>IFS зацепил меня идеей, что у каждого паттерна есть благое намерение. А потом незаметно произошло главное: внутренние зажимы стали <strong>расслабляться быстрее</strong>, а отношения с собой и с близкими — <strong>разворачиваться свободнее</strong>.</p>
+  </div>
+</div>
+
+<!-- ════ SLIDE 6: Quote ════ -->
+<div class="story slide-6">
+  <div class="quote-mark">"</div>
+  <blockquote>Для меня это как будто <strong>новый уровень осознанности</strong>, новый слой открывается. Когда в моменте осознаешь часть, которая тебя захватывает, ты можешь с ней разъединиться, и тогда появляется больше ясности.</blockquote>
+  <p class="source">— участник практической группы</p>
+</div>
+
+<!-- ════ SLIDE 7: Quote 2 ════ -->
+<div class="story slide-7">
+  <div class="quote-mark">"</div>
+  <blockquote>Стало меньше реактивной реакции. Вместо того чтобы действовать как хочет протектор, я замедляюсь, даю ему пространство — и вместо большой ссоры получился настоящий диалог.</blockquote>
+  <p class="source">— участник практической группы</p>
+</div>
+
+<!-- ════ SLIDE 8: Closing ════ -->
+<div class="story slide-8">
+  <h2>Хочется попробовать IFS<br>для себя?</h2>
+  <div class="links">
+    <div class="link-pill">
+      <span class="icon">👤</span>
+      Индивидуальная работа
+    </div>
+    <div class="link-pill">
+      <span class="icon">👥</span>
+      Практическая группа · старт 28 апреля
+    </div>
+  </div>
+  <p class="cta-text">Ссылки в шапке профиля ↑</p>
+</div>
+
+</body>
+</html>
