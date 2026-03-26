@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Части целого — практическая группа по IFS · Алёна Павленко</title>
 <meta name="description" content="Практическая группа по IFS для тех, кто хочет встроить практику в жизнь. 6 недель, 12 встреч, онлайн. Ведёт Алёна Павленко.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -373,12 +374,24 @@ strong { color: var(--text); }
 /* Left column — hook + solution text */
 .hero-left .hero-pain {
   font-family: var(--serif);
-  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
-  font-weight: 400;
+  font-size: clamp(1.32rem, 2.6vw, 1.78rem);
+  font-weight: 500;
   font-style: normal;
-  color: rgba(255, 255, 255, 0.95);
-  line-height: 1.5;
-  margin-bottom: 24px;
+  line-height: 1.48;
+  margin-bottom: 32px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid rgba(232, 232, 88, 0.32);
+  max-width: 38em;
+}
+
+.hero-left .hero-pain-open {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+.hero-left .hero-pain-close {
+  color: rgba(255, 255, 255, 0.93);
+  font-weight: 500;
 }
 
 .hero-left .hero-copy {
@@ -512,7 +525,7 @@ strong { color: var(--text); }
 /* ═══════════════════════════════════════════
    WEBINAR BANNER
    ═══════════════════════════════════════════ */
-.webinar-banner { padding-top: 0; padding-bottom: 0; }
+.webinar-banner { padding-top: 72px; padding-bottom: 72px; }
 .webinar-card {
   background: linear-gradient(135deg, rgba(13,92,99,.06), rgba(232,232,88,.08));
   border: 1px solid var(--card-border);
@@ -523,12 +536,17 @@ strong { color: var(--text); }
   margin: 0 auto;
 }
 .webinar-tag {
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .16em;
+  display: inline-block;
+  font-size: clamp(0.9rem, 2.4vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-soft);
-  margin-bottom: 16px;
+  color: var(--text-inverse);
+  background: var(--bg-dark);
+  padding: 12px 26px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 18px rgba(13, 92, 99, 0.22);
 }
 .webinar-title {
   font-family: var(--serif);
@@ -1244,7 +1262,7 @@ strong { color: var(--text); }
   .cert-grid { grid-template-columns: 1fr; }
   .hero-section { padding: 40px 18px; }
   .hero-section .section-inner { grid-template-columns: 1fr; gap: 32px; }
-  .hero-left .hero-pain { font-size: 1.15rem; }
+  .hero-left .hero-pain { font-size: 1.2rem; padding-bottom: 22px; margin-bottom: 28px; }
   .hero-illustration { width: 120px; height: 120px; }
   .hero-card { padding: 28px 20px; }
   .hero-card-price { font-size: 1.4rem; }
@@ -1544,7 +1562,7 @@ strong { color: var(--text); }
         <span class="hero-badge">Практическая группа по IFS</span>
       </div>
       <h1 class="animate-in delay-2">Части целого</h1>
-      <p class="hero-pain animate-in delay-3">Практическая группа для тех, кому саморазвитие стало второй работой — а напряжение внутри никуда не делось.</p>
+      <p class="hero-pain animate-in delay-3"><span class="hero-pain-open">Практическая группа для тех, кому саморазвитие стало второй работой</span> — <span class="hero-pain-close">а внутреннее напряжение никуда не делось.</span></p>
       <p class="hero-copy animate-in delay-3">IFS — простой и органичный метод работы со своими паттернами. Эта практическая группа устроена так, чтобы IFS естественно интегрировался в твою жизнь, снижая внутреннее напряжение и освобождая энергию для реализации твоего потенциала.</p>
       <p class="hero-copy animate-in delay-4">Практика здесь — как спа для психики: расслабление и пространство для себя.</p>
       <p class="hero-accent animate-in delay-5">Ты уже целое. Эта группа помогает это ощутить на практике.</p>
@@ -1584,6 +1602,10 @@ strong { color: var(--text); }
         <p class="hero-card-label">Старт 28 апреля · 6 недель · 12 встреч · онлайн</p>
         <div class="hero-card-details">
           <span class="hero-card-detail">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            до 24 человек
+          </span>
+          <span class="hero-card-detail">
             <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             2 встречи в неделю
           </span>
@@ -1606,25 +1628,6 @@ strong { color: var(--text); }
 </section>
 
 <!-- ═══════════════════════════════════════════
-     WEBINAR BANNER
-     ═══════════════════════════════════════════ -->
-<section class="section webinar-banner">
-  <div class="section-inner">
-    <div class="webinar-card animate-in delay-1">
-      <div class="webinar-tag">Открытый вебинар</div>
-      <h2 class="webinar-title">IFS для жизни: как <em>договариваться</em> со своими паттернами</h2>
-      <p class="webinar-desc">Разберём на практике, как работает метод IFS и почему он помогает там, где знания о себе уже есть, а напряжение внутри никуда не делось.</p>
-      <div class="webinar-meta">
-        <span>8 апреля</span>
-        <span>10:00 GMT / 13:00 МСК</span>
-        <span>Zoom · бесплатно</span>
-      </div>
-      <a href="webinar.html" class="cta-gold">Подробнее и регистрация</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
      ABOUT — bigger photo
      ═══════════════════════════════════════════ -->
 <section id="section-1" class="section about-section">
@@ -1641,6 +1644,25 @@ strong { color: var(--text); }
           <p>IFS зацепил меня идеей, что у каждого паттерна есть благое намерение. А потом незаметно произошло главное: внутренние зажимы стали <strong>расслабляться быстрее</strong>, а отношения с собой и с близкими — <strong>разворачиваться свободнее</strong>. Сейчас я вижу такие же трансформации у тех, кому помогаю интегрировать IFS в индивидуальной работе. Это и вдохновило меня создать эту практическую группу.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WEBINAR BANNER (после знакомства с автором)
+     ═══════════════════════════════════════════ -->
+<section class="section webinar-banner">
+  <div class="section-inner">
+    <div class="webinar-card animate-in delay-1">
+      <div class="webinar-tag">Открытый вебинар</div>
+      <h2 class="webinar-title">IFS для жизни: как <em>договариваться</em> со своими паттернами</h2>
+      <p class="webinar-desc">Познакомимся и разберём на практике, как работает метод IFS и как он помогает превратить знания о себе в конкретные действия.</p>
+      <div class="webinar-meta">
+        <span>8 апреля</span>
+        <span>10:00 GMT / 13:00 МСК</span>
+        <span>онлайн · бесплатно</span>
+      </div>
+      <a href="webinar.html" class="cta-gold">Подробнее и регистрация</a>
     </div>
   </div>
 </section>
@@ -1934,6 +1956,10 @@ strong { color: var(--text); }
       <div class="format-item format-item-start">
         <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>
         <span class="format-value">Старт 28 апреля</span>
+      </div>
+      <div class="format-item">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="format-value">до 24 человек</span>
       </div>
       <div class="format-item">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -2281,9 +2307,9 @@ const allDots = navContainer.querySelectorAll('.nav-dot');
 const dotObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const idx = parseInt(entry.target.id.replace('section-', ''), 10);
+      const idx = Array.prototype.indexOf.call(sections, entry.target);
       allDots.forEach(d => d.classList.remove('active'));
-      if (allDots[idx]) allDots[idx].classList.add('active');
+      if (idx >= 0 && allDots[idx]) allDots[idx].classList.add('active');
     }
   });
 }, { threshold: 0.35 });
