@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "critic-landing",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "C:/Users/pavle/Documents/GitHub/ifs-for-life/ifs-for-life"],
+      "port": 8080
+    }
+  ]
+}
