@@ -72,14 +72,31 @@ p{
 .social-link svg{
   width:18px;height:18px;fill:currentColor;
 }
-.back-link{
-  display:inline-block;
-  margin-top:28px;
-  color:#1a7a7a;
-  font-size:0.9rem;
-  text-decoration:none;
+.cta-block{
+  margin-top:32px;
+  padding-top:28px;
+  border-top:1px solid #cce0dc;
 }
-.back-link:hover{ color:#C4A265; }
+.cta-block p{
+  font-size:.95rem;
+  color:#4a6360;
+  margin-bottom:20px;
+}
+.btn-main{
+  display:inline-block;
+  padding:18px 40px;
+  background:#e8e858;
+  color:#0a4a50;
+  font-weight:700;
+  font-size:1.05rem;
+  border-radius:50px;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+}
+.btn-main:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(232,232,88,.4);
+}
 </style>
 </head>
 <body>
@@ -102,7 +119,10 @@ p{
     </div>
   </div>
 
-  <a href="https://alena-pavlenko-phd.netlify.app/" class="back-link">Полюбопытствовать ещё →</a>
+  <div class="cta-block">
+    <p>Практические группы, индивидуальная работа и возможность познакомиться поближе.</p>
+    <a href="https://alena-pavlenko-phd.netlify.app/" class="btn-main">Полюбопытствовать ещё →</a>
+  </div>
 </div>
 </body>
 </html>
