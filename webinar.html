@@ -270,6 +270,20 @@ body{
   color:rgba(22,36,34,.35);
 }
 
+.form-status{
+  text-align:center;
+  font-size:.95rem;
+  margin-top:16px;
+  min-height:24px;
+}
+.form-status.success{color:var(--dark);font-weight:600}
+.form-status.error{color:#c0392b}
+.btn-primary:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:600px){
   .hero{padding:48px 20px}
@@ -291,8 +305,8 @@ body{
         <span class="meta-label">вторник</span>
       </div>
       <div class="meta-item">
-        <span class="meta-value">10:00 GMT</span>
-        <span class="meta-label">12:00 Москва</span>
+        <span class="meta-value">12:00 МСК</span>
+        <span class="meta-label">11:00 CET</span>
       </div>
       <div class="meta-item">
         <span class="meta-value">Zoom</span>
@@ -327,9 +341,8 @@ body{
 
 <section class="cta-bottom" id="register">
   <h2 class="section-title">Регистрация</h2>
-  <p>8 апреля, 10:00 GMT / 12:00 МСК. Бесплатно, в Zoom. Ссылка придёт на почту после регистрации.</p>
-  <form name="webinar-registration" method="POST" action="/success.html" data-netlify="true" class="reg-form">
-    <input type="hidden" name="form-name" value="webinar-registration">
+  <p>8 апреля, 12:00 МСК / 11:00 CET. Бесплатно, в Zoom. Ссылка придёт на почту после регистрации.</p>
+  <form id="regForm" class="reg-form">
     <div class="form-field">
       <label for="name">Имя</label>
       <input type="text" id="name" name="name" required placeholder="Как вас зовут">
@@ -342,10 +355,48 @@ body{
       <label for="telegram">Telegram</label>
       <input type="text" id="telegram" name="telegram" placeholder="@username">
     </div>
-    <button type="submit" class="btn-primary" style="width:100%;margin-top:8px">Зарегистрироваться</button>
+    <button type="submit" id="submitBtn" class="btn-primary" style="width:100%;margin-top:8px">Зарегистрироваться</button>
+    <div id="formStatus" class="form-status"></div>
   </form>
   <p style="margin-top:32px;font-size:.95rem"><a href="https://alena-pavlenko-phd.netlify.app/" style="color:var(--dark);text-decoration:underline;text-underline-offset:3px">Полюбопытствовать →</a></p>
 </section>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUSw3XfkM7xEh8mxTCTgob7r_E3sEkVZmKMZZk83-kxvRrtO3fB6rlCNcTHpApF-qW7A/exec';
+
+const form = document.getElementById('regForm');
+const btn = document.getElementById('submitBtn');
+const status = document.getElementById('formStatus');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+  status.className = 'form-status';
+  status.textContent = '';
+
+  const data = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    telegram: form.telegram.value.trim()
+  };
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(data)
+    });
+    window.location.href = '/success.html';
+  } catch (err) {
+    status.className = 'form-status error';
+    status.textContent = 'Что-то пошло не так. Напишите мне в Telegram.';
+    btn.textContent = 'Зарегистрироваться';
+    btn.disabled = false;
+  }
+});
+</script>
 
 </body>
 </html>
