@@ -688,7 +688,8 @@ img { max-width: 100%; height: auto; display: block; }
   color: rgba(255,255,255,0.7);
   letter-spacing: .03em;
 }
-.form-field input {
+.form-field input,
+.form-field textarea {
   padding: 14px 18px;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 12px;
@@ -698,12 +699,15 @@ img { max-width: 100%; height: auto; display: block; }
   background: rgba(255,255,255,0.08);
   outline: none;
   transition: border-color .2s;
+  resize: vertical;
 }
-.form-field input:focus {
+.form-field input:focus,
+.form-field textarea:focus {
   border-color: var(--accent-2);
   box-shadow: 0 0 0 3px rgba(232,232,88,0.15);
 }
-.form-field input::placeholder {
+.form-field input::placeholder,
+.form-field textarea::placeholder {
   color: rgba(255,255,255,0.35);
 }
 .social-links {
@@ -1021,6 +1025,10 @@ img { max-width: 100%; height: auto; display: block; }
       <div class="form-field">
         <label for="telegram">Telegram</label>
         <input type="text" id="telegram" name="telegram" placeholder="@username">
+      </div>
+      <div class="form-field">
+        <label for="note">Что привело или чего хочется от группы <span style="font-weight:400;color:rgba(255,255,255,0.4)">(по желанию)</span></label>
+        <textarea id="note" name="note" rows="3" placeholder="Можно коротко, можно подробно — как удобно"></textarea>
       </div>
       <button type="submit" class="cta-gold" style="width:100%;margin-top:8px;font-family:var(--sans);font-size:1.05rem;cursor:pointer;">Записаться</button>
     </form>
