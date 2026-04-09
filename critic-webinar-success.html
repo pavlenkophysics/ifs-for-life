@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Регистрация прошла!</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',-apple-system,sans-serif;
+  background:#f8fcf9;
+  color:#1a2b28;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 24px;
+}
+.card{
+  text-align:center;
+  max-width:540px;
+}
+.check-icon{ margin-bottom:24px; }
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  color:#0e6168;
+  margin-bottom:16px;
+  line-height:1.3;
+}
+p{
+  font-size:1.05rem;
+  line-height:1.7;
+  color:#4a6360;
+  margin-bottom:20px;
+}
+
+/* Zoom details card */
+.zoom-card{
+  background:rgba(13,92,99,.06);
+  border:1px solid rgba(156,206,202,.3);
+  border-radius:16px;
+  padding:28px 32px;
+  text-align:left;
+  margin:28px 0;
+}
+.zoom-card-title{
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#1a7a7a;
+  margin-bottom:16px;
+}
+.zoom-detail{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+  font-size:.95rem;
+  color:#1a2b28;
+}
+.zoom-detail:last-child{ margin-bottom:0; }
+.zoom-detail svg{
+  width:18px;height:18px;
+  stroke:#7eb8b5;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  flex-shrink:0;
+}
+.zoom-detail a{
+  color:#0e6168;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:#7eb8b5;
+  word-break:break-all;
+}
+.zoom-detail a:hover{ text-decoration-color:#0e6168; }
+.zoom-detail strong{ color:#0e6168; }
+
+/* Calendar button */
+.btn-calendar{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 32px;
+  background:#0e6168;
+  color:#f5faf8;
+  border:none;
+  border-radius:50px;
+  font-family:'Inter',sans-serif;
+  font-size:.95rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s ease;
+  margin-bottom:8px;
+}
+.btn-calendar:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(14,97,104,.2);
+}
+.btn-calendar svg{
+  width:18px;height:18px;fill:currentColor;
+}
+.btn-note{
+  font-size:.82rem;
+  color:#7eb8b5;
+  margin-bottom:0;
+}
+
+/* Social */
+.social-section{
+  margin-top:32px;
+  padding-top:28px;
+  border-top:1px solid #cce0dc;
+}
+.social-section p{
+  font-size:.95rem;
+  color:#4a6360;
+  margin-bottom:16px;
+}
+.social-links{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#0e6168;
+  color:#f5faf8;
+  padding:14px 28px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:.95rem;
+  transition:all .3s ease;
+}
+.social-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(14,97,104,.2);
+}
+.social-link svg{
+  width:18px;height:18px;fill:currentColor;
+}
+
+/* Promo */
+.promo-block{
+  margin-top:32px;
+  padding-top:28px;
+  border-top:1px solid #cce0dc;
+}
+.promo-block p{
+  font-size:.92rem;
+  color:#4a6360;
+  margin-bottom:20px;
+}
+.btn-main{
+  display:inline-block;
+  padding:16px 36px;
+  background:#e8e858;
+  color:#0a4a50;
+  font-weight:700;
+  font-size:1rem;
+  border-radius:50px;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+}
+.btn-main:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(232,232,88,.4);
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="check-icon"><svg width="56" height="56" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="#0e6168" opacity=".1"/><circle cx="28" cy="28" r="20" fill="#0e6168" opacity=".15"/><path d="M20 28.5l6 6 10.5-12" stroke="#0e6168" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <h1>Готово, вы зарегистрированы!</h1>
+  <p>Приглашение в календарь со ссылкой на Zoom уже скачалось. Если этого не произошло — нажмите кнопку ниже.</p>
+
+  <button class="btn-calendar" onclick="downloadICS()">
+    <svg viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM16 2v4M8 2v4M3 10h18"/></svg>
+    Скачать приглашение в календарь
+  </button>
+  <p class="btn-note">Откройте файл, и встреча добавится в ваш календарь.</p>
+
+  <div class="zoom-card">
+    <div class="zoom-card-title">Детали встречи</div>
+    <div class="zoom-detail">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span>15 апреля, <strong>12:00 МСК</strong> / 10:00 Лиссабон</span>
+    </div>
+    <div class="zoom-detail">
+      <svg viewBox="0 0 24 24"><path d="M15 10l5 5-5 5"/><path d="M4 4v7a4 4 0 004 4h12"/></svg>
+      <a href="https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1" target="_blank" rel="noopener">Ссылка на Zoom</a>
+    </div>
+    <div class="zoom-detail">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      <span>ID: <strong>842 2940 1867</strong> · Пароль: <strong>179747</strong></span>
+    </div>
+  </div>
+
+  <div class="social-section">
+    <p>Подписывайтесь, чтобы не потеряться до вебинара.</p>
+    <div class="social-links">
+      <a href="https://t.me/Alena_Pavlenko_IFS" target="_blank" rel="noopener" class="social-link">
+        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </a>
+      <a href="https://www.instagram.com/alena_pavlenko_ifs" target="_blank" rel="noopener" class="social-link">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+
+  <div class="promo-block">
+    <p>Хотите копнуть глубже после вебинара? Я веду практическую группу из четырёх встреч, где мы по-настоящему разбираемся в отношениях с внутренним критиком.</p>
+    <a href="https://ifs-for-life.netlify.app/" class="btn-main">Узнать про группу →</a>
+  </div>
+</div>
+
+<script>
+function downloadICS() {
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Alena Pavlenko//Webinar Critic//RU',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    'UID:critic-webinar-20260415@alena-pavlenko',
+    'DTSTAMP:20260409T000000Z',
+    'DTSTART:20260415T090000Z',
+    'DTEND:20260415T103000Z',
+    'SUMMARY:Вебинар «Внутренний критик» — Алёна Павленко',
+    'DESCRIPTION:Zoom: https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1\\nID встречи: 842 2940 1867\\nПароль: 179747',
+    'LOCATION:https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1',
+    'STATUS:CONFIRMED',
+    'BEGIN:VALARM',
+    'TRIGGER:-PT30M',
+    'ACTION:DISPLAY',
+    'DESCRIPTION:Вебинар через 30 минут',
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([lines], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'webinar-critic-15apr.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>

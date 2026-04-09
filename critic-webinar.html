@@ -3,21 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тот, кто всегда знает, как надо · Вебинар · Алёна Павленко</title>
+<meta name="description" content="Бесплатный вебинар про внутреннего критика: откуда он берётся, чего хочет и как изменить с ним отношения. 15 апреля, 12:00 МСК.">
+<meta property="og:title" content="Тот, кто всегда знает, как надо — бесплатный вебинар">
+<meta property="og:description" content="Вебинар про внутреннего критика: откуда он берётся, чего хочет и как изменить с ним отношения. 15 апреля, 12:00 МСК / 10:00 Лиссабон.">
+<meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<title>Открытый вебинар: IFS для жизни</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 :root{
   --bg:#f8fcf9;
+  --bg-alt:#f0f7f5;
   --dark:#0d5c63;
   --dark-deep:#0a4a50;
+  --accent:#1a7a7a;
   --soft:#7eb8b5;
   --gold:#e8e858;
+  --gold-hover:#d4d030;
   --text:#162422;
   --text-light:#f5faf8;
+  --muted:#4a6360;
   --border:rgba(126,184,181,.35);
+  --card-bg:rgba(255,255,255,.92);
+  --card-border:rgba(156,206,202,.3);
   --serif:'Playfair Display',Georgia,serif;
   --sans:'Inter',-apple-system,sans-serif;
 }
@@ -36,7 +48,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(160deg,#0d5c63 0%,#1a6b6b 50%,#0d5c63 100%);
+  background:radial-gradient(ellipse at 30% 40%, #1a7a7a 0%, #0e6168 55%, #0a4f55 100%);
   padding:60px 24px;
   position:relative;
   overflow:hidden;
@@ -46,7 +58,7 @@ body{
   position:absolute;
   width:600px;height:600px;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(126,184,181,.15),transparent 70%);
+  background:radial-gradient(circle,rgba(126,184,181,.12),transparent 70%);
   top:-200px;right:-100px;
   pointer-events:none;
 }
@@ -55,7 +67,7 @@ body{
   position:absolute;
   width:400px;height:400px;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(232,232,88,.08),transparent 70%);
+  background:radial-gradient(circle,rgba(232,232,88,.06),transparent 70%);
   bottom:-100px;left:-50px;
   pointer-events:none;
 }
@@ -68,33 +80,29 @@ body{
 }
 
 .hero-tag{
-  font-size:.85rem;
+  font-size:.82rem;
   font-weight:600;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:rgba(245,250,248,.5);
+  color:rgba(245,250,248,.45);
   margin-bottom:28px;
 }
 
 .hero-title{
   font-family:var(--serif);
-  font-size:clamp(2.2rem,5vw,3.4rem);
+  font-size:clamp(2.4rem,5.5vw,3.6rem);
   font-weight:700;
   color:var(--text-light);
-  line-height:1.2;
+  line-height:1.15;
   margin-bottom:24px;
-}
-.hero-title em{
-  font-style:italic;
-  color:var(--gold);
 }
 
 .hero-sub{
-  font-size:1.1rem;
-  color:rgba(245,250,248,.75);
-  max-width:520px;
+  font-size:1.08rem;
+  color:rgba(245,250,248,.78);
+  max-width:540px;
   margin:0 auto 40px;
-  line-height:1.7;
+  line-height:1.75;
 }
 
 .hero-meta{
@@ -117,7 +125,7 @@ body{
 }
 .meta-label{
   font-size:.78rem;
-  color:rgba(245,250,248,.45);
+  color:rgba(245,250,248,.42);
   letter-spacing:.05em;
 }
 
@@ -128,6 +136,7 @@ body{
   color:var(--dark);
   font-weight:700;
   font-size:1.05rem;
+  font-family:var(--sans);
   border:none;
   border-radius:50px;
   cursor:pointer;
@@ -138,12 +147,46 @@ body{
   transform:translateY(-2px);
   box-shadow:0 8px 28px rgba(232,232,88,.4);
 }
+.btn-primary:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
+}
 
 .hero-note{
   margin-top:20px;
   font-size:.82rem;
-  color:rgba(245,250,248,.4);
+  color:rgba(245,250,248,.38);
 }
+
+.hero-record{
+  margin-top:28px;
+  padding:20px 28px;
+  background:rgba(255,255,255,.1);
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  max-width:460px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.hero-record p{
+  font-size:.92rem;
+  color:rgba(245,250,248,.82);
+  margin-bottom:12px;
+}
+.hero-record a{
+  display:inline-block;
+  padding:10px 24px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;
+  color:#fff;
+  text-decoration:none;
+  font-size:.88rem;
+  font-weight:500;
+  transition:background .2s;
+}
+.hero-record a:hover{ background:rgba(255,255,255,.2); }
 
 /* ═══ CONTENT ═══ */
 .section{
@@ -175,19 +218,34 @@ body{
 }
 .topics li{
   padding:24px 28px;
-  background:rgba(255,255,255,.92);
-  border:1px solid var(--border);
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
   border-radius:16px;
   font-size:1rem;
-  line-height:1.6;
+  line-height:1.65;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.topics li:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(13,92,99,.08);
 }
 .topics li strong{
   color:var(--dark);
 }
 
+.section-accent{
+  font-size:.95rem;
+  color:var(--gold-hover);
+  border-left:2px solid var(--gold);
+  padding-left:16px;
+  margin-top:8px;
+  line-height:1.6;
+  font-style:italic;
+}
+
 /* ═══ ABOUT ═══ */
 .about{
-  background:rgba(13,92,99,.04);
+  background:var(--bg-alt);
   padding:80px 24px;
 }
 .about-inner{
@@ -202,9 +260,10 @@ body{
   margin-bottom:8px;
 }
 .about-role{
-  font-size:.9rem;
+  font-size:.88rem;
   color:var(--soft);
   margin-bottom:20px;
+  font-weight:500;
 }
 .about-inner p{
   font-size:1.02rem;
@@ -212,12 +271,21 @@ body{
   color:var(--text);
   line-height:1.7;
 }
+.about-inner a{
+  color:var(--dark);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:var(--soft);
+}
+.about-inner a:hover{
+  text-decoration-color:var(--dark);
+}
 
 /* ═══ CTA BOTTOM ═══ */
 .cta-bottom{
   padding:80px 24px;
   text-align:center;
-  background:linear-gradient(180deg,var(--bg) 0%,rgba(13,92,99,.06) 100%);
+  background:radial-gradient(ellipse at 50% 100%, rgba(13,92,99,.06) 0%, var(--bg) 70%);
 }
 .cta-bottom .section-title{
   max-width:500px;
@@ -258,7 +326,7 @@ body{
   font-family:var(--sans);
   font-size:1rem;
   color:var(--text);
-  background:rgba(255,255,255,.92);
+  background:var(--card-bg);
   outline:none;
   transition:border-color .2s;
 }
@@ -270,11 +338,70 @@ body{
   color:rgba(22,36,34,.35);
 }
 
+.form-status{
+  text-align:center;
+  font-size:.95rem;
+  margin-top:16px;
+  min-height:24px;
+}
+.form-status.success{color:var(--dark);font-weight:600}
+.form-status.error{color:#c0392b}
+
+.cta-links{
+  margin-top:32px;
+  font-size:.92rem;
+  color:var(--muted);
+}
+.cta-links a{
+  color:var(--dark);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:var(--soft);
+}
+.cta-links a:hover{
+  text-decoration-color:var(--dark);
+}
+
+/* ═══ GROUPS PROMO ═══ */
+.promo{
+  background:var(--bg-alt);
+  padding:60px 24px;
+  text-align:center;
+}
+.promo-inner{
+  max-width:600px;
+  margin:0 auto;
+}
+.promo-inner p{
+  font-size:.95rem;
+  color:var(--muted);
+  margin-bottom:16px;
+  line-height:1.7;
+}
+.promo-inner a{
+  color:var(--dark);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:var(--soft);
+  font-weight:500;
+}
+.promo-inner a:hover{ text-decoration-color:var(--dark); }
+
+/* ═══ FOOTER ═══ */
+.site-footer{
+  text-align:center;
+  padding:32px 24px;
+  font-size:.82rem;
+  color:var(--muted);
+  opacity:.6;
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:600px){
   .hero{padding:48px 20px}
   .hero-meta{gap:20px}
   .section,.about-inner{padding-left:20px;padding-right:20px}
+  .topics li{padding:20px 22px}
 }
 </style>
 </head>
@@ -282,17 +409,17 @@ body{
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">открытый вебинар</div>
-    <h1 class="hero-title">IFS для жизни: как <em>договариваться</em> со своими паттернами</h1>
-    <p class="hero-sub">Разберём на практике, как работает метод IFS и почему он помогает там, где знания о себе уже есть, а напряжение внутри никуда не делось.</p>
+    <div class="hero-tag">бесплатный вебинар · 15 апреля</div>
+    <h1 class="hero-title">Тот, кто всегда знает, как надо</h1>
+    <p class="hero-sub">У каждого есть голос, который уверен: можно было лучше. Он появляется в самый неподходящий момент и редко бывает доволен. На этом вебинаре разберёмся, кто он такой и как изменить с ним отношения.</p>
     <div class="hero-meta">
       <div class="meta-item">
-        <span class="meta-value">8 апреля</span>
+        <span class="meta-value">15 апреля</span>
         <span class="meta-label">вторник</span>
       </div>
       <div class="meta-item">
-        <span class="meta-value">10:00 GMT</span>
-        <span class="meta-label">12:00 Москва</span>
+        <span class="meta-value">12:00 МСК</span>
+        <span class="meta-label">10:00 Лиссабон</span>
       </div>
       <div class="meta-item">
         <span class="meta-value">Zoom</span>
@@ -300,52 +427,142 @@ body{
       </div>
     </div>
     <a href="#register" class="btn-primary">Зарегистрироваться</a>
-    <div class="hero-note">Бесплатно. Ссылка на Zoom придёт после регистрации.</div>
+    <div class="hero-note">Бесплатно. Приглашение в календарь придёт после регистрации.</div>
+    <div class="hero-record">
+      <p>Если не получится быть — напишите мне, я пришлю запись.</p>
+      <a href="https://t.me/Alena_Pavlenko_PhD" target="_blank" rel="noopener">Написать Алёне</a>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <h2 class="section-title">О чём будем говорить</h2>
-  <p>Бывает, что знаний о себе уже достаточно — внутренний критик знаком, паттерны понятны, книги прочитаны. А внутреннее напряжение остаётся. И бывает ощущение, что чем больше узнаёшь, тем сложнее с этим всем жить.</p>
-  <p>На этом вебинаре я расскажу про подход, который помог мне выйти из этого цикла, и покажу, как он работает на практике.</p>
+  <p>Мы все знакомы с этим голосом. Он критикует, оценивает, напоминает о промахах. Обычно с ним пытаются бороться или стараются перекричать. На этом вебинаре я покажу, что с ним можно по-другому.</p>
   <ul class="topics">
-    <li><strong>Что такое IFS</strong> и почему он устроен иначе, чем привычные подходы к работе с собой</li>
-    <li><strong>Части и Self</strong> — как выстраивать отношения с внутренним критиком, прокрастинатором и другими знакомыми персонажами</li>
-    <li><strong>Живая демонстрация</strong> — покажу, как выглядит контакт с частью на практике</li>
-    <li><strong>Вопросы и разговор</strong> — пространство, чтобы спросить то, что важно именно вам</li>
+    <li><strong>Откуда берётся критик</strong> — я расскажу, почему этот голос вообще появился и какую роль он выполняет на самом деле</li>
+    <li><strong>Чего он хочет</strong> — спойлер: ответ бывает неожиданным. Разберёмся, что стоит за постоянным «ты мог бы лучше»</li>
+    <li><strong>Как с ним разговаривать</strong> — покажу на конкретном примере, как выглядит такой разговор на практике</li>
+    <li><strong>Ваши вопросы</strong> — пространство обсудить то, что откликнулось, и задать вопросы</li>
   </ul>
+  <p class="section-accent">Жаргона и терминов на вебинаре не будет. Всё простым языком — для тех, кто впервые слышит про такой подход, и для тех, кто уже знаком.</p>
 </section>
 
 <section class="about">
   <div class="about-inner">
     <div class="about-name">Алёна Павленко</div>
-    <div class="about-role">IFS-практик, эксперт и куратор IFS Academy, PhD</div>
-    <p>Экспериментальный физик и стратегический консультант в прошлом. Больше 350 часов соматической практики. Два года обучения у Guthrie Sayen — старшего преподавателя Evolving IFS.</p>
-    <p>Веду индивидуальную работу по IFS и соматике, проектирую программы в IFS Academy. В апреле запускаю практическую группу «Дорогой критик, нам надо поговорить».</p>
+    <div class="about-role">IFS-практик · Эксперт и куратор IFS Academy</div>
+    <p>Физик по образованию, стратегический консультант в прошлом. Больше 350 часов работы с телом и состоянием. Два года обучения IFS у <a href="https://www.healingandawakening.institute/about" target="_blank" rel="noopener">Гэтри Сайена</a> — ученика Ричарда Шварца и одного из ведущих преподавателей метода.</p>
+    <p>Веду <a href="https://alena-pavlenko-phd.netlify.app/" target="_blank" rel="noopener">индивидуальную работу и практические группы</a>, помогаю людям менять отношения с привычными паттернами — включая внутреннего критика.</p>
   </div>
 </section>
 
 <section class="cta-bottom" id="register">
   <h2 class="section-title">Регистрация</h2>
-  <p>8 апреля, 10:00 GMT / 12:00 МСК. Бесплатно, в Zoom. Ссылка придёт на почту после регистрации.</p>
-  <form name="webinar-critic" method="POST" action="/critic-success.html" data-netlify="true" class="reg-form">
-    <input type="hidden" name="form-name" value="webinar-critic">
+  <p>15 апреля, 12:00 МСК / 10:00 Лиссабон. Бесплатно, в Zoom. После регистрации на почту придёт приглашение в календарь со ссылкой.</p>
+  <form id="regForm" name="critic-webinar" method="POST" data-netlify="true" class="reg-form">
+    <input type="hidden" name="form-name" value="critic-webinar">
     <div class="form-field">
       <label for="name">Имя</label>
       <input type="text" id="name" name="name" required placeholder="Как вас зовут">
     </div>
     <div class="form-field">
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required placeholder="На эту почту придёт ссылка на Zoom">
+      <input type="email" id="email" name="email" required placeholder="На эту почту придёт приглашение">
     </div>
     <div class="form-field">
       <label for="telegram">Telegram</label>
-      <input type="text" id="telegram" name="telegram" placeholder="@username">
+      <input type="text" id="telegram" name="telegram" placeholder="@username (по желанию)">
     </div>
-    <button type="submit" class="btn-primary" style="width:100%;margin-top:8px">Зарегистрироваться</button>
+    <button type="submit" id="submitBtn" class="btn-primary" style="width:100%;margin-top:8px">Зарегистрироваться</button>
+    <div id="formStatus" class="form-status"></div>
   </form>
-  <p style="margin-top:32px;font-size:.95rem"><a href="critic.html" style="color:var(--dark);text-decoration:underline;text-underline-offset:3px">Подробнее о группе «Дорогой критик, нам надо поговорить»</a></p>
+  <div class="cta-links">
+    <p>Есть вопросы? <a href="https://t.me/Alena_Pavlenko_PhD" target="_blank" rel="noopener">Напишите мне в Telegram</a>.</p>
+  </div>
 </section>
+
+<section class="promo">
+  <div class="promo-inner">
+    <p>Вебинар — отличная возможность познакомиться. А для тех, кто захочет копнуть глубже, я веду <a href="https://ifs-for-life.netlify.app/" target="_blank" rel="noopener">практическую группу «Дорогой критик, нам надо поговорить»</a> — четыре встречи, чтобы по-настоящему разобраться в отношениях со своим внутренним критиком.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  Алёна Павленко · 2026
+</footer>
+
+<script>
+/* ── ICS calendar invite generation ── */
+function generateICS() {
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Alena Pavlenko//Webinar Critic//RU',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    'UID:critic-webinar-20260415@alena-pavlenko',
+    'DTSTAMP:20260409T000000Z',
+    'DTSTART:20260415T090000Z',
+    'DTEND:20260415T103000Z',
+    'SUMMARY:Вебинар «Внутренний критик» — Алёна Павленко',
+    'DESCRIPTION:Zoom: https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1\\nID встречи: 842 2940 1867\\nПароль: 179747',
+    'LOCATION:https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1',
+    'STATUS:CONFIRMED',
+    'BEGIN:VALARM',
+    'TRIGGER:-PT30M',
+    'ACTION:DISPLAY',
+    'DESCRIPTION:Вебинар через 30 минут',
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([lines], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'webinar-critic-15apr.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ── Form: Netlify + ICS download ── */
+const form = document.getElementById('regForm');
+const btn = document.getElementById('submitBtn');
+const status = document.getElementById('formStatus');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+  status.className = 'form-status';
+  status.textContent = '';
+
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
+
+    /* Download .ics calendar invite */
+    generateICS();
+
+    /* Redirect to success page */
+    setTimeout(() => {
+      window.location.href = '/critic-webinar-success.html';
+    }, 600);
+  } catch (err) {
+    status.className = 'form-status error';
+    status.textContent = 'Что-то пошло не так. Напишите мне в Telegram.';
+    btn.textContent = 'Зарегистрироваться';
+    btn.disabled = false;
+  }
+});
+</script>
 
 </body>
 </html>
