@@ -491,43 +491,6 @@ body{
 </footer>
 
 <script>
-/* ── ICS calendar invite generation ── */
-function generateICS() {
-  const lines = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Alena Pavlenko//Webinar Critic//RU',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    'UID:critic-webinar-20260506@alena-pavlenko',
-    'DTSTAMP:20260422T000000Z',
-    'DTSTART:20260506T090000Z',
-    'DTEND:20260506T103000Z',
-    'SUMMARY:Вебинар «Дорогой критик\\, нам надо поговорить» — Алёна Павленко',
-    'DESCRIPTION:Открытый вебинар «Дорогой критик\\, нам надо поговорить»\\n\\nОн просто всегда рядом. Комментирует решения\\, оценивает результаты\\, выматывает. На вебинаре расскажу\\, откуда он берётся и чего на самом деле хочет — и покажу\\, что меняется\\, когда начинаешь с ним разговаривать.\\n\\nНа встрече:\\n— Расскажу\\, откуда берётся внутренний критик — когда понимаешь\\, зачем он появился\\, уже становится легче\\n— Разберёмся\\, чего он на самом деле хочет — ответ часто бывает неожиданным\\n— Покажу на конкретном примере\\, как выглядит разговор с ним на практике\\n— Будет время для вопросов\\n\\nЯ рассказываю простым языком — подойдёт и тем\\, кто впервые слышит про такой подход\\, и тем\\, кто уже знаком.\\n\\nВедёт Алёна Павленко — IFS-практик\\, эксперт и куратор IFS Academy\\, кандидат физ.-мат. наук.\\n\\nZoom: https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1\\n\\nБольше информации: https://alena-pavlenko-phd.netlify.app/\\nВопросы: https://t.me/Alena_Pavlenko_PhD',
-    'LOCATION:https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1',
-    'STATUS:CONFIRMED',
-    'BEGIN:VALARM',
-    'TRIGGER:-PT30M',
-    'ACTION:DISPLAY',
-    'DESCRIPTION:Вебинар через 30 минут',
-    'END:VALARM',
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-
-  const blob = new Blob([lines], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'webinar-critic-6may.ics';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
 /* ── Google Apps Script URL ── */
 /* ЗАМЕНИ эту ссылку на URL своего задеплоенного скрипта (см. critic-webinar-script.js) */
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5VV16Ja1Qx3HtBick5zNnkzsDym-hELSJClLcwVnp2f7URawEVjgYLl9h3N-IgRKLUw/exec';
@@ -556,9 +519,6 @@ form.addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(data)
     });
-
-    /* Download .ics calendar invite */
-    generateICS();
 
     /* Redirect to success page */
     setTimeout(() => {
