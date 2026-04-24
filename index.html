@@ -1600,9 +1600,9 @@ strong { color: var(--text); }
         <circle cx="110" cy="110" r="88" fill="none" stroke="rgba(126,184,181,0.2)" stroke-width="0.8" stroke-dasharray="4 6"/>
       </svg>
       <div class="hero-card animate-in delay-3">
-        <p class="hero-card-label">Старт 5 мая · 6 недель · онлайн</p>
+        <p class="hero-card-label">Старт в сентябре 2026 · 6 недель · онлайн</p>
         <p class="hero-card-price">450 €</p>
-        <a href="#section-10" class="cta-gold">Записаться</a>
+        <a href="#section-10" class="cta-gold">Сохранить место</a>
         <a href="#section-4" class="cta-secondary">Подробнее о программе</a>
         <div class="hero-card-author">
           Ведёт <strong>Алёна Павленко</strong><br>
@@ -1641,11 +1641,11 @@ strong { color: var(--text); }
   <div class="section-inner">
     <div class="webinar-card animate-in delay-1">
       <div class="webinar-tag">Открытый вебинар</div>
-      <h2 class="webinar-title">IFS для жизни: как <em>договариваться</em> со своими паттернами</h2>
-      <p class="webinar-desc">Познакомимся и разберём на практике, как работает метод IFS и как он помогает превратить знания о себе в конкретные действия.</p>
+      <h2 class="webinar-title">Дорогой критик, <em>нам надо поговорить</em></h2>
+      <p class="webinar-desc">Откуда берётся внутренний критик, чего он на самом деле хочет и что меняется, когда начинаешь с ним разговаривать. Покажу метод IFS в действии — на живой демонстрации.</p>
       <div class="webinar-meta">
-        <span>8 апреля</span>
-        <span>09:00 GMT / 12:00 МСК</span>
+        <span>6 мая</span>
+        <span>12:00 МСК</span>
         <span>онлайн · бесплатно</span>
       </div>
       <a href="webinar.html" class="cta-gold">Подробнее и регистрация</a>
@@ -1788,8 +1788,8 @@ strong { color: var(--text); }
       </div>
     </div>
     <div class="animate-in delay-3" style="text-align:center; margin-top:36px;">
-      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 16px;">Старт группы — 5 мая</p>
-      <a href="#section-10" class="cta-gold">Записаться</a>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 16px;">Старт группы — в сентябре 2026</p>
+      <a href="#section-10" class="cta-gold">Сохранить место</a>
     </div>
   </div>
 </section>
@@ -1941,7 +1941,7 @@ strong { color: var(--text); }
     <div class="format-grid animate-in delay-2">
       <div class="format-item format-item-start">
         <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>
-        <span class="format-value">Старт 5 мая</span>
+        <span class="format-value">Старт в сентябре 2026</span>
       </div>
       <div class="format-item">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -2093,11 +2093,11 @@ strong { color: var(--text); }
     <div class="section-icon animate-in"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
     <div class="section-divider animate-in"></div>
     <p class="section-subtitle animate-in delay-1">Следующий шаг</p>
-    <h2 class="animate-in delay-1">Регистрация</h2>
+    <h2 class="animate-in delay-1">Сохранить место</h2>
     <p class="cta-details animate-in delay-2">
-      Старт группы — 5 мая. Заполните форму ниже, и я свяжусь с вами.
+      Следующий набор большой группы — в сентябре 2026. А до этого будут открытые вебинары и короткие группы. Заполните форму, и я свяжусь с вами, когда откроется регистрация.
     </p>
-    <form name="group-registration" method="POST" action="/success.html" data-netlify="true" class="reg-form animate-in delay-3">
+    <form id="groupForm" name="group-registration" method="POST" action="/success.html" data-netlify="true" class="reg-form animate-in delay-3">
       <input type="hidden" name="form-name" value="group-registration">
       <div class="form-field">
         <label for="reg-name">Имя</label>
@@ -2115,13 +2115,14 @@ strong { color: var(--text); }
         <label for="reg-note">Что привело или чего хочется от группы <span style="font-weight:400;color:var(--accent-soft)">(по желанию)</span></label>
         <textarea id="reg-note" name="note" rows="3" placeholder="Можно коротко, можно подробно — как удобно"></textarea>
       </div>
-      <button type="submit" class="cta-gold" style="width:100%;border:none;cursor:pointer;font-family:var(--sans)">Записаться</button>
+      <button type="submit" id="groupSubmitBtn" class="cta-gold" style="width:100%;border:none;cursor:pointer;font-family:var(--sans)">Сохранить место</button>
+      <div id="groupFormStatus" style="text-align:center;font-size:.95rem;margin-top:16px;min-height:24px"></div>
     </form>
     <div class="cta-links animate-in delay-4">
       <p>Если у вас есть вопросы про группу, можно <a href="https://t.me/Alena_Pavlenko_PhD" target="_blank" rel="noopener">написать мне в Telegram</a>.</p>
     </div>
     <div class="cta-alt-card animate-in delay-5">
-      <p><strong>Если эти даты не подходят</strong> — следующие запуски я анонсирую в <a href="https://t.me/Alena_Pavlenko_IFS" target="_blank" rel="noopener">Telegram-канале</a> и <a href="https://www.instagram.com/alena_pavlenko_ifs" target="_blank" rel="noopener">Instagram</a>. Подпишитесь, чтобы не пропустить.</p>
+      <p><strong>Хотите раньше?</strong> Анонсы и открытия наборов — в <a href="https://t.me/Alena_Pavlenko_IFS" target="_blank" rel="noopener">Telegram-канале</a> и <a href="https://www.instagram.com/alena_pavlenko_ifs" target="_blank" rel="noopener">Instagram</a>. Подпишитесь, чтобы не пропустить.</p>
     </div>
     <div class="cta-alt-card animate-in delay-5">
       <p><strong>Если вам ближе индивидуальный формат</strong> или хотите работать в этом методе параллельно с группой — я веду индивидуальную работу в подходе IFS, запись на встречу-знакомство и форматы: <a href="https://alena-pavlenko-ifs.netlify.app/" target="_blank" rel="noopener">на моём сайте</a>.</p>
@@ -2317,6 +2318,49 @@ function toggleFaq(btn) {
   } else {
     answer.style.maxHeight = '0';
   }
+}
+
+/* ── Форма предзаписи на группу ── */
+/* ЗАМЕНИ эту ссылку на URL своего задеплоенного скрипта (см. group-registration-script.js) */
+const GROUP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfj840rOlurF2sOplRplAwDH_8qRFnBeC-UepfSvBwnXo9O1-BXr6mj9D4Pl_FVXnkNg/exec';
+
+const groupForm = document.getElementById('groupForm');
+const groupBtn = document.getElementById('groupSubmitBtn');
+const groupStatus = document.getElementById('groupFormStatus');
+
+if (groupForm && GROUP_SCRIPT_URL !== 'PASTE_YOUR_DEPLOYED_SCRIPT_URL_HERE') {
+  groupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    groupBtn.disabled = true;
+    groupBtn.textContent = 'Отправляем...';
+    groupStatus.style.color = 'var(--muted)';
+    groupStatus.textContent = '';
+
+    const data = {
+      name: groupForm.name.value.trim(),
+      email: groupForm.email.value.trim(),
+      telegram: groupForm.telegram.value.trim(),
+      note: groupForm.note.value.trim()
+    };
+
+    try {
+      await fetch(GROUP_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      });
+
+      setTimeout(() => {
+        window.location.href = '/success.html';
+      }, 600);
+    } catch (err) {
+      groupStatus.style.color = '#c0392b';
+      groupStatus.textContent = 'Что-то пошло не так. Напишите мне в Telegram.';
+      groupBtn.textContent = 'Сохранить место';
+      groupBtn.disabled = false;
+    }
+  });
 }
 </script>
 </body>

@@ -117,12 +117,12 @@ function doPost(e) {
   // ── Письмо участнику ──
   MailApp.sendEmail({
     to: data.email,
-    subject: 'Приглашение: вебинар «Дорогой критик, нам надо поговорить» — 15 апреля, 12:00 МСК',
+    subject: 'Приглашение: вебинар «Дорогой критик, нам надо поговорить» — 6 мая, 12:00 МСК',
     htmlBody:
       '<div style="font-family:Arial,sans-serif;max-width:540px;color:#1a2b28;line-height:1.6">' +
         '<h2 style="color:#0e6168;font-size:22px;margin-bottom:16px">Вы зарегистрированы!</h2>' +
         '<p>Привет, ' + data.name + '!</p>' +
-        '<p>Вебинар <strong>«Дорогой критик, нам надо поговорить»</strong> пройдёт <strong>15 апреля в 12:00 по Москве</strong> (10:00 по Лиссабону).</p>' +
+        '<p>Вебинар <strong>«Дорогой критик, нам надо поговорить»</strong> пройдёт <strong>6 мая в 12:00 по Москве</strong> (10:00 по Лиссабону).</p>' +
         '<div style="background:#f0f7f5;padding:20px 24px;border-radius:12px;border-left:3px solid #0e6168;margin:20px 0">' +
           '<strong style="color:#0e6168">Ссылка на Zoom:</strong><br>' +
           '<a href="https://us06web.zoom.us/j/84229401867?pwd=fcZlvqkn7xxr7b543oMCIu7RltZexw.1" style="color:#0e6168">' +
