@@ -2337,10 +2337,10 @@ if (groupForm && GROUP_SCRIPT_URL !== 'PASTE_YOUR_DEPLOYED_SCRIPT_URL_HERE') {
     groupStatus.textContent = '';
 
     const data = {
-      name: groupForm.name.value.trim(),
-      email: groupForm.email.value.trim(),
-      telegram: groupForm.telegram.value.trim(),
-      note: groupForm.note.value.trim()
+      name: document.getElementById('reg-name').value.trim(),
+      email: document.getElementById('reg-email').value.trim(),
+      telegram: document.getElementById('reg-tg').value.trim(),
+      note: document.getElementById('reg-note').value.trim()
     };
 
     try {
