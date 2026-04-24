@@ -2322,7 +2322,7 @@ function toggleFaq(btn) {
 
 /* ── Форма предзаписи на группу ── */
 /* ЗАМЕНИ эту ссылку на URL своего задеплоенного скрипта (см. group-registration-script.js) */
-const GROUP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfj840rOlurF2sOplRplAwDH_8qRFnBeC-UepfSvBwnXo9O1-BXr6mj9D4Pl_FVXnkNg/exec';
+const GROUP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcYMc80WlAB_GsclYWhSE4q6MoyduYxLM5aQwdlNR3j9DsOiMba-htliJ4mb8bRdlAKQ/exec';
 
 const groupForm = document.getElementById('groupForm');
 const groupBtn = document.getElementById('groupSubmitBtn');
@@ -2337,6 +2337,7 @@ if (groupForm && GROUP_SCRIPT_URL !== 'PASTE_YOUR_DEPLOYED_SCRIPT_URL_HERE') {
     groupStatus.textContent = '';
 
     const data = {
+      type: 'group',
       name: document.getElementById('reg-name').value.trim(),
       email: document.getElementById('reg-email').value.trim(),
       telegram: document.getElementById('reg-tg').value.trim(),
