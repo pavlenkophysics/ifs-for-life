@@ -67,7 +67,7 @@ function doPost(e) {
     subject: 'Вы записаны в предзапись на «Части целого»',
     htmlBody:
       '<div style="font-family:Arial,sans-serif;max-width:540px;color:#1a2b28;line-height:1.6">' +
-        '<h2 style="color:#0e6168;font-size:22px;margin-bottom:16px">Место сохранено</h2>' +
+        '<h2 style="color:#0e6168;font-size:22px;margin-bottom:16px">Вы в предзаписи</h2>' +
         '<p>Привет, ' + data.name + '!</p>' +
         '<p>Спасибо, что записались на предзапись практической группы <strong>«Части целого»</strong>.</p>' +
         '<div style="background:#f0f7f5;padding:20px 24px;border-radius:12px;border-left:3px solid #0e6168;margin:20px 0">' +

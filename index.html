@@ -1602,7 +1602,7 @@ strong { color: var(--text); }
       <div class="hero-card animate-in delay-3">
         <p class="hero-card-label">Старт в сентябре 2026 · 6 недель · онлайн</p>
         <p class="hero-card-price">450 €</p>
-        <a href="#section-10" class="cta-gold">Сохранить место</a>
+        <a href="#section-10" class="cta-gold">Предзапись</a>
         <a href="#section-4" class="cta-secondary">Подробнее о программе</a>
         <div class="hero-card-author">
           Ведёт <strong>Алёна Павленко</strong><br>
@@ -1789,7 +1789,7 @@ strong { color: var(--text); }
     </div>
     <div class="animate-in delay-3" style="text-align:center; margin-top:36px;">
       <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 16px;">Старт группы — в сентябре 2026</p>
-      <a href="#section-10" class="cta-gold">Сохранить место</a>
+      <a href="#section-10" class="cta-gold">Предзапись</a>
     </div>
   </div>
 </section>
@@ -2093,9 +2093,9 @@ strong { color: var(--text); }
     <div class="section-icon animate-in"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
     <div class="section-divider animate-in"></div>
     <p class="section-subtitle animate-in delay-1">Следующий шаг</p>
-    <h2 class="animate-in delay-1">Сохранить место</h2>
+    <h2 class="animate-in delay-1">Предзапись</h2>
     <p class="cta-details animate-in delay-2">
-      Следующий набор большой группы — в сентябре 2026. А до этого будут открытые вебинары и короткие группы. Заполните форму, и я свяжусь с вами, когда откроется регистрация.
+      Следующий набор — в сентябре 2026. До этого будут открытые вебинары и короткие группы. Оставьте предзапись, чтобы не пропустить запуск и другие мероприятия.
     </p>
     <form id="groupForm" name="group-registration" method="POST" action="/success.html" data-netlify="true" class="reg-form animate-in delay-3">
       <input type="hidden" name="form-name" value="group-registration">
@@ -2115,7 +2115,7 @@ strong { color: var(--text); }
         <label for="reg-note">Что привело или чего хочется от группы <span style="font-weight:400;color:var(--accent-soft)">(по желанию)</span></label>
         <textarea id="reg-note" name="note" rows="3" placeholder="Можно коротко, можно подробно — как удобно"></textarea>
       </div>
-      <button type="submit" id="groupSubmitBtn" class="cta-gold" style="width:100%;border:none;cursor:pointer;font-family:var(--sans)">Сохранить место</button>
+      <button type="submit" id="groupSubmitBtn" class="cta-gold" style="width:100%;border:none;cursor:pointer;font-family:var(--sans)">Предзапись</button>
       <div id="groupFormStatus" style="text-align:center;font-size:.95rem;margin-top:16px;min-height:24px"></div>
     </form>
     <div class="cta-links animate-in delay-4">
@@ -2357,7 +2357,7 @@ if (groupForm && GROUP_SCRIPT_URL !== 'PASTE_YOUR_DEPLOYED_SCRIPT_URL_HERE') {
     } catch (err) {
       groupStatus.style.color = '#c0392b';
       groupStatus.textContent = 'Что-то пошло не так. Напишите мне в Telegram.';
-      groupBtn.textContent = 'Сохранить место';
+      groupBtn.textContent = 'Предзапись';
       groupBtn.disabled = false;
     }
   });
