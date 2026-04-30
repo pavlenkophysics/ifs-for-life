@@ -45,6 +45,10 @@ function doPost(e) {
     return handleGroupRegistration_(data);
   }
 
+  if (data.type === 'critic-group') {
+    return handleCriticGroupRegistration_(data);
+  }
+
   return handleWebinarRegistration_(data);
 }
 
@@ -246,6 +250,88 @@ function getOrCreateGroupSheet_() {
   });
 
   return sheet;
+}
+
+// ─────────────────────────────────────────────
+// ПРЕДЗАПИСЬ на группу «Дорогой критик» — старт в июле 2026
+// ─────────────────────────────────────────────
+function getOrCreateCriticGroupSheet_() {
+  var props = PropertiesService.getScriptProperties();
+  var sheetId = props.getProperty('CRITIC_GROUP_SHEET_ID');
+
+  if (sheetId) {
+    try {
+      return SpreadsheetApp.openById(sheetId).getActiveSheet();
+    } catch (e) {}
+  }
+
+  var ss = SpreadsheetApp.create('Предзапись — Дорогой критик');
+  var sheet = ss.getActiveSheet();
+  sheet.appendRow(['Дата', 'Имя', 'Email', 'Telegram', 'Комментарий']);
+  sheet.getRange(1, 1, 1, 5).setFontWeight('bold');
+  sheet.setColumnWidth(1, 160);
+  sheet.setColumnWidth(2, 180);
+  sheet.setColumnWidth(3, 240);
+  sheet.setColumnWidth(4, 160);
+  sheet.setColumnWidth(5, 360);
+  sheet.setFrozenRows(1);
+  props.setProperty('CRITIC_GROUP_SHEET_ID', ss.getId());
+
+  MailApp.sendEmail({
+    to: 'alena.pavlenko.phd@gmail.com',
+    subject: 'Таблица предзаписи на «Дорогой критик» создана',
+    body: 'Первая предзапись на группу про критика! Таблица:\n' + ss.getUrl()
+  });
+
+  return sheet;
+}
+
+function handleCriticGroupRegistration_(data) {
+  var sheet = getOrCreateCriticGroupSheet_();
+  sheet.appendRow([
+    new Date(),
+    data.name,
+    data.email,
+    data.telegram || '',
+    data.note || ''
+  ]);
+
+  MailApp.sendEmail({
+    to: data.email,
+    subject: 'Вы в предзаписи на «Дорогой критик, нам надо поговорить»',
+    htmlBody:
+      '<div style="font-family:Arial,sans-serif;max-width:540px;color:#1a2b28;line-height:1.6">' +
+        '<h2 style="color:#0e6168;font-size:22px;margin-bottom:16px">Вы в предзаписи</h2>' +
+        '<p>Привет, ' + data.name + '!</p>' +
+        '<p>Спасибо, что записались на предзапись практической группы <strong>«Дорогой критик, нам надо поговорить»</strong>.</p>' +
+        '<div style="background:#f0f7f5;padding:20px 24px;border-radius:12px;border-left:3px solid #0e6168;margin:20px 0">' +
+          '<strong style="color:#0e6168">Старт группы — в июле 2026.</strong><br>' +
+          'Я напишу вам за несколько недель до старта, когда откроется регистрация.' +
+        '</div>' +
+        '<p>А до этого будут открытые вебинары и короткие встречи — если интересно, подписывайтесь на мой <a href="https://t.me/Alena_Pavlenko_IFS" style="color:#0e6168">телеграм-канал</a> и <a href="https://www.instagram.com/alena_pavlenko_ifs" style="color:#0e6168">инстаграм</a>.</p>' +
+        '<p style="color:#7eb8b5;margin-top:28px;padding-top:16px;border-top:1px solid #cce0dc">' +
+          'До связи!<br>Алёна' +
+        '</p>' +
+        '<p style="font-size:13px;color:#999;margin-top:20px">' +
+          '<a href="https://alena-pavlenko-phd.netlify.app/" style="color:#0e6168">Все проекты</a> · ' +
+          '<a href="https://t.me/Alena_Pavlenko_PhD" style="color:#0e6168">Написать в Telegram</a>' +
+        '</p>' +
+      '</div>',
+    name: 'Алёна Павленко'
+  });
+
+  MailApp.sendEmail({
+    to: 'alena.pavlenko.phd@gmail.com',
+    subject: 'Новая предзапись на «Дорогой критик»: ' + data.name,
+    body: 'Имя: ' + data.name +
+      '\nEmail: ' + data.email +
+      '\nTelegram: ' + (data.telegram || '—') +
+      '\n\nКомментарий:\n' + (data.note || '—') +
+      '\n\nДата: ' + new Date().toLocaleString('ru-RU')
+  });
+
+  return ContentService.createTextOutput(JSON.stringify({ status: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function handleGroupRegistration_(data) {
